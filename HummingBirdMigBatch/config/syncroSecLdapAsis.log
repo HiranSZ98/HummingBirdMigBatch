@@ -1,0 +1,3 @@
+26.10.2020 08:50:18 904; main; (ConfigReader.java:getProperties:49) INFO  com.enel.hrgdms.batch.conf - Individuato il file di properties esterno
+26.10.2020 08:57:30 805; main; (ConfigReader.java:getProperties:49) INFO  com.enel.hrgdms.batch.conf - Individuato il file di properties esterno
+26.10.2020 09:00:31 151; main; (ConfigReader.java:getProperties:49) INFO  com.enel.hrgdms.batch.conf - Individuato il file di properties esterno

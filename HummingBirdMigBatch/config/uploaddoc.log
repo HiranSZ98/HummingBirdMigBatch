@@ -1,0 +1,268 @@
+14.10.2020 15:55:41 414; main; (BatchStarter.java:main:28) INFO  com.enel.hrgdms.batch.main.BatchStarter - HRGDMSBatch 1.0.0 del 27/05/2020
+14.10.2020 15:55:41 453; main; (ModuloFactory.java:getModulo:27) INFO  com.enel.hrgdms.batch.main.BatchStarter - ***** Parametri in ingresso *****
+14.10.2020 15:55:41 460; main; (ModuloFactory.java:getModulo:28) INFO  com.enel.hrgdms.batch.main.BatchStarter - Tipo operazione --->BATCH_UPDATE_DOC<---
+14.10.2020 15:55:41 486; main; (ConfigReader.java:getProperties:315) INFO  com.enel.hrgdms.batch.conf - Individuato il file di properties esterno
+14.10.2020 15:55:41 497; main; (ModuloUpdateDoc.java:inizialize:92) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Parsing command line [BATCH_UPDATE_DOC, -jsondriver, C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\update_doc\jsontoproc.json, -report, C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\update_doc, -timestamp, 112233, -test, -reporttemplate, C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\import\conf\HRGDMSBatchImportNew-DefaultReportTemplate.xml]
+14.10.2020 15:55:41 534; main; (ModuloUpdateDoc.java:preExecute:104) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Esecuzione preExecute Modulo ModuloUpdateDoc
+14.10.2020 15:55:41 536; main; (ModuloUpdateDoc.java:preExecute:108) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Parametro -json è presente: C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\update_doc\jsontoproc.json
+14.10.2020 15:55:41 537; main; (ModuloUpdateDoc.java:preExecute:144) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Parametro -report: C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\update_doc
+14.10.2020 15:55:41 537; main; (ModuloUpdateDoc.java:preExecute:150) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - report template is present
+14.10.2020 15:55:41 538; main; (ModuloUpdateDoc.java:preExecute:156) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - reportTemplate: C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\import\conf\HRGDMSBatchImportNew-DefaultReportTemplate.xml
+14.10.2020 15:55:41 539; main; (ModuloUpdateDoc.java:preExecute:168) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Parametro -timestamp: 112233
+14.10.2020 15:55:41 539; main; (ModuloUpdateDoc.java:preExecute:182) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Parametro -test è presente 
+14.10.2020 15:55:41 540; main; (ModuloUpdateDoc.java:preExecute:186) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Initialize Cache
+14.10.2020 15:56:07 220; main; (JPAManager.java:getEntityManager:57) ERROR com.enel.hrgdms.batch.manager.JPAManager - getEntityManager: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:271)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:233)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210)
+	at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:51)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:94)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:242)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.handleTypes(MetadataBuildingProcess.java:352)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:111)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:858)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:885)
+	at org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:58)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:55)
+	at com.enel.hrgdms.batch.manager.JPAManager.getEntityManager(JPAManager.java:49)
+	at com.enel.hrgdms.batch.manager.DBManager.findAllObjectStore(DBManager.java:29)
+	at com.enel.hrgdms.batch.modulo.ModuloUpdateDoc.preExecute(ModuloUpdateDoc.java:188)
+	at com.enel.hrgdms.batch.main.Batch.execute(Batch.java:34)
+	at com.enel.hrgdms.batch.main.BatchStarter.main(BatchStarter.java:32)
+Caused by: org.hibernate.exception.JDBCConnectionException: Error calling Driver#connect
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:115)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator$1$1.convert(BasicConnectionCreator.java:101)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.convertSqlException(BasicConnectionCreator.java:123)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:41)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.createConnection(BasicConnectionCreator.java:58)
+	at org.hibernate.engine.jdbc.connections.internal.PooledConnections.addConnections(PooledConnections.java:123)
+	at org.hibernate.engine.jdbc.connections.internal.PooledConnections.<init>(PooledConnections.java:42)
+	at org.hibernate.engine.jdbc.connections.internal.PooledConnections.<init>(PooledConnections.java:20)
+	at org.hibernate.engine.jdbc.connections.internal.PooledConnections$Builder.build(PooledConnections.java:161)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.buildPool(DriverManagerConnectionProviderImpl.java:109)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.configure(DriverManagerConnectionProviderImpl.java:72)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:94)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:242)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.buildJdbcConnectionAccess(JdbcEnvironmentInitiator.java:145)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:66)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:88)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:259)
+	... 17 more
+Caused by: java.sql.SQLRecoverableException: IO Error: The Network Adapter could not establish the connection
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:489)
+	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:553)
+	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:254)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:32)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:528)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:38)
+	... 32 more
+Caused by: oracle.net.ns.NetException: The Network Adapter could not establish the connection
+	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:439)
+	at oracle.net.resolver.AddrResolution.resolveAndExecute(AddrResolution.java:454)
+	at oracle.net.ns.NSProtocol.establishConnection(NSProtocol.java:693)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:251)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1140)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:340)
+	... 37 more
+Caused by: java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at oracle.net.nt.TcpNTAdapter.connect(TcpNTAdapter.java:149)
+	at oracle.net.nt.ConnOption.connect(ConnOption.java:133)
+	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:405)
+	... 42 more
+14.10.2020 15:56:07 225; main; (DBManager.java:findAllObjectStore:32) ERROR com.enel.hrgdms.batch.manager.DBManager - Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+14.10.2020 15:56:07 225; main; (ModuloUpdateDoc.java:preExecute:427) ERROR com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+java.lang.Exception: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at com.enel.hrgdms.batch.manager.DBManager.findAllObjectStore(DBManager.java:33)
+	at com.enel.hrgdms.batch.modulo.ModuloUpdateDoc.preExecute(ModuloUpdateDoc.java:188)
+	at com.enel.hrgdms.batch.main.Batch.execute(Batch.java:34)
+	at com.enel.hrgdms.batch.main.BatchStarter.main(BatchStarter.java:32)
+Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:271)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:233)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210)
+	at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:51)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:94)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:242)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.handleTypes(MetadataBuildingProcess.java:352)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:111)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:858)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:885)
+	at org.hibernate.jpa.HibernatePersistenceProvider.createEntityManagerFactory(HibernatePersistenceProvider.java:58)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:55)
+	at com.enel.hrgdms.batch.manager.JPAManager.getEntityManager(JPAManager.java:49)
+	at com.enel.hrgdms.batch.manager.DBManager.findAllObjectStore(DBManager.java:29)
+	... 3 more
+Caused by: org.hibernate.exception.JDBCConnectionException: Error calling Driver#connect
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:115)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator$1$1.convert(BasicConnectionCreator.java:101)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.convertSqlException(BasicConnectionCreator.java:123)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:41)
+	at org.hibernate.engine.jdbc.connections.internal.BasicConnectionCreator.createConnection(BasicConnectionCreator.java:58)
+	at org.hibernate.engine.jdbc.connections.internal.PooledConnections.addConnections(PooledConnections.java:123)
+	at org.hibernate.engine.jdbc.connections.internal.PooledConnections.<init>(PooledConnections.java:42)
+	at org.hibernate.engine.jdbc.connections.internal.PooledConnections.<init>(PooledConnections.java:20)
+	at org.hibernate.engine.jdbc.connections.internal.PooledConnections$Builder.build(PooledConnections.java:161)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.buildPool(DriverManagerConnectionProviderImpl.java:109)
+	at org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl.configure(DriverManagerConnectionProviderImpl.java:72)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:94)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:242)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.buildJdbcConnectionAccess(JdbcEnvironmentInitiator.java:145)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:66)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:88)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:259)
+	... 17 more
+Caused by: java.sql.SQLRecoverableException: IO Error: The Network Adapter could not establish the connection
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:489)
+	at oracle.jdbc.driver.PhysicalConnection.<init>(PhysicalConnection.java:553)
+	at oracle.jdbc.driver.T4CConnection.<init>(T4CConnection.java:254)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:32)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:528)
+	at org.hibernate.engine.jdbc.connections.internal.DriverConnectionCreator.makeConnection(DriverConnectionCreator.java:38)
+	... 32 more
+Caused by: oracle.net.ns.NetException: The Network Adapter could not establish the connection
+	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:439)
+	at oracle.net.resolver.AddrResolution.resolveAndExecute(AddrResolution.java:454)
+	at oracle.net.ns.NSProtocol.establishConnection(NSProtocol.java:693)
+	at oracle.net.ns.NSProtocol.connect(NSProtocol.java:251)
+	at oracle.jdbc.driver.T4CConnection.connect(T4CConnection.java:1140)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:340)
+	... 37 more
+Caused by: java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at oracle.net.nt.TcpNTAdapter.connect(TcpNTAdapter.java:149)
+	at oracle.net.nt.ConnOption.connect(ConnOption.java:133)
+	at oracle.net.nt.ConnStrategy.execute(ConnStrategy.java:405)
+	... 42 more
+14.10.2020 15:56:07 233; main; (Batch.java:execute:69) ERROR com.enel.hrgdms.batch.main.Batch - Operazione Modulo ModuloUpdateDoc interrotta.
+14.10.2020 15:56:07 234; main; (Batch.java:execute:72) ERROR com.enel.hrgdms.batch.main.Batch - Numero di record elaborati prima dell'interruzione= 0000000000
+14.10.2020 15:56:07 234; main; (Batch.java:execute:73) ERROR com.enel.hrgdms.batch.main.Batch - Numero di record elaborati con successo prima dell'interruzione= 0000000000
+14.10.2020 15:56:07 235; main; (BatchStarter.java:main:35) ERROR com.enel.hrgdms.batch.main.BatchStarter - Esecuzione fallita: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+14.10.2020 15:56:07 235; main; (BatchStarter.java:main:36) INFO  com.enel.hrgdms.batch.main.BatchStarter - Operazione completata con esito = 5 (se >= 5 errore bloccante).
+14.10.2020 15:58:55 401; main; (BatchStarter.java:main:28) INFO  com.enel.hrgdms.batch.main.BatchStarter - HRGDMSBatch 1.0.0 del 27/05/2020
+14.10.2020 15:58:55 463; main; (ModuloFactory.java:getModulo:27) INFO  com.enel.hrgdms.batch.main.BatchStarter - ***** Parametri in ingresso *****
+14.10.2020 15:58:55 466; main; (ModuloFactory.java:getModulo:28) INFO  com.enel.hrgdms.batch.main.BatchStarter - Tipo operazione --->BATCH_UPDATE_DOC<---
+14.10.2020 15:58:55 497; main; (ConfigReader.java:getProperties:315) INFO  com.enel.hrgdms.batch.conf - Individuato il file di properties esterno
+14.10.2020 15:58:55 511; main; (ModuloUpdateDoc.java:inizialize:92) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Parsing command line [BATCH_UPDATE_DOC, -jsondriver, C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\update_doc\jsontoproc.json, -report, C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\update_doc, -timestamp, 112233, -test, -reporttemplate, C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\import\conf\HRGDMSBatchImportNew-DefaultReportTemplate.xml]
+14.10.2020 15:58:55 527; main; (ModuloUpdateDoc.java:preExecute:104) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Esecuzione preExecute Modulo ModuloUpdateDoc
+14.10.2020 15:58:55 529; main; (ModuloUpdateDoc.java:preExecute:108) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Parametro -json è presente: C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\update_doc\jsontoproc.json
+14.10.2020 15:58:55 531; main; (ModuloUpdateDoc.java:preExecute:144) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Parametro -report: C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\update_doc
+14.10.2020 15:58:55 532; main; (ModuloUpdateDoc.java:preExecute:150) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - report template is present
+14.10.2020 15:58:55 533; main; (ModuloUpdateDoc.java:preExecute:156) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - reportTemplate: C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\import\conf\HRGDMSBatchImportNew-DefaultReportTemplate.xml
+14.10.2020 15:58:55 533; main; (ModuloUpdateDoc.java:preExecute:168) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Parametro -timestamp: 112233
+14.10.2020 15:58:55 534; main; (ModuloUpdateDoc.java:preExecute:182) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Parametro -test è presente 
+14.10.2020 15:58:55 534; main; (ModuloUpdateDoc.java:preExecute:186) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Initialize Cache
+14.10.2020 15:59:05 732; main; (ModuloUpdateDoc.java:preExecute:190) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Connection to the OS: ECARPE_EVENT_OBJ
+14.10.2020 15:59:05 734; main; (ModuloUpdateDoc.java:preExecute:190) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Connection to the OS: ECARPE_EXPORT_OBJ
+14.10.2020 15:59:05 734; main; (ModuloUpdateDoc.java:preExecute:190) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Connection to the OS: ECARPE_OBJ
+14.10.2020 15:59:05 735; main; (ModuloUpdateDoc.java:preExecute:190) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Connection to the OS: ORGDESIGN_OBJ
+14.10.2020 15:59:16 882; main; (FnManager.java:buildPropertyTemplatesCache:536) INFO  com.enel.hrgdms.batch.manager.FnManager - -- buildPropertyTemplatesCache --
+14.10.2020 15:59:19 406; main; (FnManager.java:buildPropertyTemplatesCacheGlobal:519) INFO  com.enel.hrgdms.batch.manager.FnManager - Building PropertyTemplates of OS: ECARPE_EVENT_OBJ in Cache
+14.10.2020 15:59:27 233; main; (FnManager.java:buildPropertyTemplatesCacheGlobal:519) INFO  com.enel.hrgdms.batch.manager.FnManager - Building PropertyTemplates of OS: ECARPE_EXPORT_OBJ in Cache
+14.10.2020 15:59:34 609; main; (FnManager.java:buildPropertyTemplatesCacheGlobal:519) INFO  com.enel.hrgdms.batch.manager.FnManager - Building PropertyTemplates of OS: ECARPE_OBJ in Cache
+14.10.2020 15:59:48 614; main; (FnManager.java:buildPropertyTemplatesCacheGlobal:519) INFO  com.enel.hrgdms.batch.manager.FnManager - Building PropertyTemplates of OS: ECARPE_OFFLINE_OBJ in Cache
+14.10.2020 16:00:04 450; main; (FnManager.java:buildPropertyTemplatesCacheGlobal:519) INFO  com.enel.hrgdms.batch.manager.FnManager - Building PropertyTemplates of OS: ORGDESIGN_OBJ in Cache
+14.10.2020 16:00:15 683; main; (FnManager.java:buildPropertyTemplatesCacheGlobal:519) INFO  com.enel.hrgdms.batch.manager.FnManager - Building PropertyTemplates of OS: ORGDESIGN_OFFLINE_OBJ in Cache
+14.10.2020 16:00:27 199; main; (ModuloUpdateDoc.java:preExecute:267) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - query select top 1 Id from Document where DocType = 'CE'
+14.10.2020 16:00:27 212; main; (BatchUpdateDocManager.java:getDocWithCriteria:217) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Execute getDocWithCriteria() 
+14.10.2020 16:00:27 212; main; (BatchUpdateDocManager.java:getObjConnection:251) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Execute getObjConnection() 
+14.10.2020 16:00:27 212; main; (BatchUpdateDocManager.java:getObjConnection:258) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Inizio connessione OBJ : ECARPE_OFFLINE_OBJ
+14.10.2020 16:00:27 394; main; (BatchUpdateDocManager.java:getObjConnection:263) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Connection to the Object Store: ECARPE_OFFLINE_OBJ
+14.10.2020 16:00:27 394; main; (BatchUpdateDocManager.java:getDocWithCriteria:227) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Connection to the Object Store: ECARPE_OFFLINE_OBJ
+14.10.2020 16:00:27 481; main; (BatchUpdateDocManager.java:getDocWithCriteria:229) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Found 1 documents offline
+14.10.2020 16:00:27 481; main; (BatchUpdateDocManager.java:getObjConnection:251) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Execute getObjConnection() 
+14.10.2020 16:00:27 481; main; (BatchUpdateDocManager.java:getObjConnection:258) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Inizio connessione OBJ : ECARPE_OBJ
+14.10.2020 16:00:27 649; main; (BatchUpdateDocManager.java:getObjConnection:263) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Connection to the Object Store: ECARPE_OBJ
+14.10.2020 16:00:27 649; main; (BatchUpdateDocManager.java:getDocWithCriteria:236) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Connection to the Object Store: ECARPE_OBJ
+14.10.2020 16:00:55 803; main; (BatchUpdateDocManager.java:getDocWithCriteria:238) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Found 1 documents online
+14.10.2020 16:00:55 803; main; (BatchUpdateDocManager.java:getDocWithCriteria:242) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Total doc to process = 2
+14.10.2020 16:00:55 807; main; (ModuloUpdateDoc.java:execute:435) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Esecuzione Modulo ModuloUpdateDoc
+14.10.2020 16:00:55 807; main; (ModuloUpdateDoc.java:execute:437) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Creating report...
+14.10.2020 16:00:55 844; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:73) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - updatePropertyAndSecurity - INIT
+14.10.2020 16:00:55 844; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:73) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - updatePropertyAndSecurity - INIT
+14.10.2020 16:00:55 845; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:74) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - OBJ : ECARPE_OBJ DOC_ID : {4094EF67-0000-CB47-B067-EE1C602A4820}
+14.10.2020 16:00:55 845; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:74) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - OBJ : ECARPE_OFFLINE_OBJ DOC_ID : {30706F6B-0000-C818-A7A7-D3886758855A}
+14.10.2020 16:00:55 845; pool-2-thread-2; (BatchUpdateDocManager.java:getObjConnection:251) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Execute getObjConnection() 
+14.10.2020 16:00:55 845; pool-2-thread-1; (BatchUpdateDocManager.java:getObjConnection:251) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Execute getObjConnection() 
+14.10.2020 16:00:55 845; pool-2-thread-2; (BatchUpdateDocManager.java:getObjConnection:258) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Inizio connessione OBJ : ECARPE_OBJ
+14.10.2020 16:00:55 845; pool-2-thread-1; (BatchUpdateDocManager.java:getObjConnection:258) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Inizio connessione OBJ : ECARPE_OFFLINE_OBJ
+14.10.2020 16:00:56 016; pool-2-thread-1; (BatchUpdateDocManager.java:getObjConnection:263) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Connection to the Object Store: ECARPE_OFFLINE_OBJ
+14.10.2020 16:00:56 086; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:81) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Update delle property al doc {30706F6B-0000-C818-A7A7-D3886758855A} in corso...
+14.10.2020 16:00:56 087; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:84) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Property : PeriodoDiRiferimento
+Value : 201909
+14.10.2020 16:00:56 087; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:86) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Property : PeriodoDiRiferimento
+Value : 201909
+14.10.2020 16:00:56 215; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:84) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Property : DocumentTitle
+Value : $DocType$_$HRBatchID$
+14.10.2020 16:00:56 216; pool-2-thread-1; (FnManager.java:getReplacedString:958) WARN  com.enel.hrgdms.batch.manager.FnManager - Replacement field CE_$HRBatchID$ is empty
+14.10.2020 16:00:56 216; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:86) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Property : DocumentTitle
+Value : CE_
+14.10.2020 16:00:56 217; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:84) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Property : CountryCode
+Value : BR
+14.10.2020 16:00:56 217; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:86) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Property : CountryCode
+Value : BR
+14.10.2020 16:00:56 217; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:118) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Update delle property al doc {30706F6B-0000-C818-A7A7-D3886758855A} terminato
+14.10.2020 16:00:56 293; pool-2-thread-2; (BatchUpdateDocManager.java:getObjConnection:263) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Connection to the Object Store: ECARPE_OBJ
+14.10.2020 16:00:56 366; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:81) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Update delle property al doc {4094EF67-0000-CB47-B067-EE1C602A4820} in corso...
+14.10.2020 16:00:56 367; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:84) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Property : PeriodoDiRiferimento
+Value : 201909
+14.10.2020 16:00:56 367; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:86) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Property : PeriodoDiRiferimento
+Value : 201909
+14.10.2020 16:00:56 381; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:151) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - ACL in Doc {30706F6B-0000-C818-A7A7-D3886758855A} is Present
+14.10.2020 16:00:56 382; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:171) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - ACL in aggiunta CN=HR_AA,CN=Groups,CN=eCarpe,CN=Applications,CN=Groups,DC=ecarpe,DC=enel gia presente nel Doc {30706F6B-0000-C818-A7A7-D3886758855A}
+14.10.2020 16:00:56 382; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:157) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - ACL CN=HR_SA_BR,CN=Groups,CN=eCarpe,CN=Applications,CN=Groups,DC=ecarpe,DC=enel nel Doc {30706F6B-0000-C818-A7A7-D3886758855A} non e' presente.
+14.10.2020 16:00:56 387; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:166) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Aggiungo ACL: CN=HR_SA_BR,CN=Groups,CN=eCarpe,CN=Applications,CN=Groups,DC=ecarpe,DC=enel ALLOW 933367
+14.10.2020 16:00:56 387; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:169) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - ACL aggiunta al Doc {30706F6B-0000-C818-A7A7-D3886758855A}
+14.10.2020 16:00:56 388; pool-2-thread-1; (FnManager.java:getReplacedString:958) WARN  com.enel.hrgdms.batch.manager.FnManager - Replacement field CN=HR_AO_$Company$_$EmployeeTitle$,CN=Groups,CN=eCarpe,CN=Applications,CN=Groups,DC=ecarpe,DC=enel is empty
+14.10.2020 16:00:56 388; pool-2-thread-1; (FnManager.java:getReplacedString:958) WARN  com.enel.hrgdms.batch.manager.FnManager - Replacement field CN=HR_AO__$EmployeeTitle$,CN=Groups,CN=eCarpe,CN=Applications,CN=Groups,DC=ecarpe,DC=enel is empty
+14.10.2020 16:00:56 388; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:157) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - ACL CN=HR_AO__,CN=Groups,CN=eCarpe,CN=Applications,CN=Groups,DC=ecarpe,DC=enel nel Doc {30706F6B-0000-C818-A7A7-D3886758855A} non e' presente.
+14.10.2020 16:00:56 388; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:166) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Aggiungo ACL: CN=HR_AO__,CN=Groups,CN=eCarpe,CN=Applications,CN=Groups,DC=ecarpe,DC=enel ALLOW 394675
+14.10.2020 16:00:56 389; pool-2-thread-1; (BatchUpdateDocManager.java:updatePropertyAndSecurity:169) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - ACL aggiunta al Doc {30706F6B-0000-C818-A7A7-D3886758855A}
+14.10.2020 16:00:56 389; pool-2-thread-1; (BatchUpdateDocThread.java:call:157) INFO  com.enel.hrgdms.batch.callable.BatchUpdateDocThread - write line in OK File: null;09766785-3;;CL21;CE;PASSALACQUAERIK ARNOLDO;229505;{30706F6B-0000-C818-A7A7-D3886758855A};PUCHI;201909.0;CL2;;
+
+14.10.2020 16:00:56 473; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:84) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Property : DocumentTitle
+Value : $DocType$_$HRBatchID$
+14.10.2020 16:00:56 473; pool-2-thread-2; (FnManager.java:getReplacedString:958) WARN  com.enel.hrgdms.batch.manager.FnManager - Replacement field CE_$HRBatchID$ is empty
+14.10.2020 16:00:56 474; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:86) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Property : DocumentTitle
+Value : CE_
+14.10.2020 16:00:56 474; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:84) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Property : CountryCode
+Value : BR
+14.10.2020 16:00:56 474; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:86) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Property : CountryCode
+Value : BR
+14.10.2020 16:00:56 474; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:118) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Update delle property al doc {4094EF67-0000-CB47-B067-EE1C602A4820} terminato
+14.10.2020 16:00:56 576; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:151) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - ACL in Doc {4094EF67-0000-CB47-B067-EE1C602A4820} is Present
+14.10.2020 16:00:56 576; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:171) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - ACL in aggiunta CN=HR_AA,CN=Groups,CN=eCarpe,CN=Applications,CN=Groups,DC=ecarpe,DC=enel gia presente nel Doc {4094EF67-0000-CB47-B067-EE1C602A4820}
+14.10.2020 16:00:56 577; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:157) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - ACL CN=HR_SA_BR,CN=Groups,CN=eCarpe,CN=Applications,CN=Groups,DC=ecarpe,DC=enel nel Doc {4094EF67-0000-CB47-B067-EE1C602A4820} non e' presente.
+14.10.2020 16:00:56 577; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:166) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Aggiungo ACL: CN=HR_SA_BR,CN=Groups,CN=eCarpe,CN=Applications,CN=Groups,DC=ecarpe,DC=enel ALLOW 933367
+14.10.2020 16:00:56 577; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:169) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - ACL aggiunta al Doc {4094EF67-0000-CB47-B067-EE1C602A4820}
+14.10.2020 16:00:56 578; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:157) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - ACL CN=HR_AO__,CN=Groups,CN=eCarpe,CN=Applications,CN=Groups,DC=ecarpe,DC=enel nel Doc {4094EF67-0000-CB47-B067-EE1C602A4820} non e' presente.
+14.10.2020 16:00:56 578; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:166) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - Aggiungo ACL: CN=HR_AO__,CN=Groups,CN=eCarpe,CN=Applications,CN=Groups,DC=ecarpe,DC=enel ALLOW 394675
+14.10.2020 16:00:56 579; pool-2-thread-2; (BatchUpdateDocManager.java:updatePropertyAndSecurity:169) INFO  com.enel.hrgdms.batch.manager.BatchUpdateDocManager - ACL aggiunta al Doc {4094EF67-0000-CB47-B067-EE1C602A4820}
+14.10.2020 16:00:56 579; pool-2-thread-2; (BatchUpdateDocThread.java:call:157) INFO  com.enel.hrgdms.batch.callable.BatchUpdateDocThread - write line in OK File: null;SCCLRA56A60M109U;;S0;CE;Bianchi;144062;{4094EF67-0000-CB47-B067-EE1C602A4820};LAURA;201909.0;CPE;;
+
+14.10.2020 16:00:56 611; main; (ModuloUpdateDoc.java:execute:457) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Eseguite 4 operazioni di Update.
+14.10.2020 16:00:56 612; main; (ModuloUpdateDoc.java:postExecute:469) INFO  com.enel.hrgdms.batch.modulo.ModuloUpdateDoc - Esecuzione postExecute Modulo ModuloUpdateDoc
+14.10.2020 16:00:56 612; main; (Batch.java:execute:39) INFO  com.enel.hrgdms.batch.main.Batch - Operazione per Modulo ModuloUpdateDoc completata, inizio verifica esito.
+14.10.2020 16:00:56 612; main; (Batch.java:execute:61) INFO  com.enel.hrgdms.batch.main.Batch - Numero di record elaborati :.............. 0000000000
+14.10.2020 16:00:56 613; main; (Batch.java:execute:62) INFO  com.enel.hrgdms.batch.main.Batch - Numero di record elaborati con successo :. 0000000004

@@ -1,0 +1,43 @@
+AUTO_OPEN,CODICE,DESCRIZIONE,EMAIL_REGISTRO,EMERGENCY,FK_DOCSORG,FK_MITTDEST,FK_TITOLARIO,SYSTEM_ID,FK_ELENCO_REGISTRI,SEPARATE_COUNTER,LAST_UPDATE,COMPANY_CODE,COMPANY_PIVA
+Y,TEMPLATES,TEMPLATES,templates@templates.it,,,,,1,,,,,
+Y,AOTMI,AOTMI m,aotmi@terna.it,N,0,0,0,2321,,,,Y,
+N,EMERGENZA,Registro di emergenza,registro_emergenza@terna.it,Y,2321,2321,2321,2,,,,,
+N,AOTMIR,AOTMI Riservati,aotmir@terna.it,N,2321,2321,2321,3927,,,,,
+Y,AOTPA,Registro AOT Palermo,aotpa@terna.it,N,0,0,0,12459,,,,N,11111
+N,AOTTO,Registro AOT Torino,aotto@terna.it,N,0,0,0,15424,,,,,
+N,AOTPD,AOTPD,aotpd@terna.it,N,0,0,0,17769,,,,,
+N,AOTMIADD,AOTMI,aotmiadd@terna.it,N,0,2321,0,18691,,,,,
+N,TERM,TERM,aotrm@terna.it,N,0,0,0,22509,,,,,
+N,TRM,TRM,aotrm@terna.it,N,0,0,0,22515,,,,,
+N,AOTRM,AOTRM,aotrm@terna.it,N,0,0,0,22521,,,,,
+N,TEAOTRM,TEAOTRM,aotrm@terna.it,N,0,0,0,22497,,,,,
+N,TEFCRM,TEFCRM,aotrm@terna.it,N,0,0,0,22503,,,,,
+N,TNA,TNA,protocollo.aotna@terna.it,N,0,0,0,2119964,,,,,
+N,TENA,TENA,protocollo.aotna@terna.it,N,0,0,0,2119970,,,,,
+N,TEFCNA,TEFCNA,protocollo.aotna@terna.it,N,0,0,0,2119976,,,,,
+N,TEAOTNA,TEAOTNA,protocollo.aotna@terna.it,N,0,0,0,2119982,,,,,
+N,DT,DT,terna.direzione@terna.it,N,0,0,0,929436,,,,,
+N,TE,TE,terna.direzione@terna.it,N,0,0,0,929442,,,,SPTE,99999999999
+,TEAD,riservato AD,protocollo.ad@terna.it,,,,,1764290,,,,,
+N,TEAMM,Registro riservato Amministrazione,protocollo.teamm@terna.it,N,0,0,0,2008162,,,,,
+N,TPD,TPD,protocollo.aotpd@terna.it,N,0,0,0,2547221,,,,,
+N,TEPD,TEPD,protocollo.aotpd@terna.it,N,0,0,0,2547227,,,,,
+N,TEFCPD,TEFCPD,protocollo.aotpd@terna.it,N,0,0,0,2547233,,,,,
+N,TEAOTPD,TEAOTPD,protocollo.aotpd@terna.it,N,0,0,0,2547239,,,,,
+N,TETO,TETO,protocollo.aotto@terna.it,N,0,0,0,3307313,,,,,
+N,TEFCTO,TEFCTO,protocollo.aotto@terna.it,N,0,0,0,3307319,,,,,
+N,TEAOTTO,TEAOTTO,protocollo.aotto@terna.it,N,0,0,0,3307325,,,,,
+N,TDTTO,TDTTO,protocollo.aotto@terna.it,N,0,0,0,3307331,,,,,
+N,SUNTG,SUNTG,protocollo.suntg@terna.it,N,0,0,0,3669956,,Y,,,
+N,TERNARETISRL,TERNARETEITALIA,protocollo.ternareteitalia@terna.it,N,0,0,0,3852294,,Y,,TR22,1111111111
+N,TRISPA,Terna Rete Italia SPA,protocollo.trispa@terna.it,N,0,0,0,3852394,,Y,,,
+Y,XDGS02,Registro di Prova modificato,,N,0,0,0,3852695,,N,,N,
+Y,REGPROVA1,REGPROVA12345,giusepe.daleno@terna.it,N,0,0,0,3853338,,Y,,N,
+Y,NEWREG123,NEWREG123,giuseppe.daleno@terna.it,N,0,0,0,3853830,,Y,,,
+Y,TESTQR1,TESTQR1,,N,0,0,0,3853977,,Y,,,
+N,R153,R153,info@docflow.it,N,0,0,0,3854109,,Y,,,
+Y,REG_09042013,Registo 09042013_mod,giuseppe.daleno@terna.it,N,0,0,0,3854779,,Y,,xxxx,1
+Y,REG_09042013_1,REG_09042013_1,giuseppe.daleno@terna.it,N,0,0,0,3854791,,Y,,,
+Y,TESTREG06,tegistro di test 06,registro.test6@ternaren.com,N,0,0,0,3855368,,Y,,9876,lamiapartitaivasuper
+Y,REG_XX,SYSTEM TEST 07062013,,N,0,0,0,3855431,,Y,,,
+Y,XX1,XX1 description,nome.cognome@gmail.com,N,0,0,0,3855632,,Y,,1234,1.23457E+19

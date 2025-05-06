@@ -1,0 +1,15 @@
+dn: CN=%UsertToUpdate%,CN=Users,DC=ecarpe,DC=enel
+changetype: modify
+replace: unicodePwd
+unicodePwd::IgBMAGUAQwBhAHIAcABlACQAMgAwADEAMwAiAA==
+-
+dn: CN=%UsertToUpdate%,CN=Users,DC=ecarpe,DC=enel
+changetype: modify
+replace: msDS-UserAccountDisabled
+msDS-UserAccountDisabled: FALSE
+-
+dn: CN=%UsertToUpdate%,CN=Users,DC=ecarpe,DC=enel
+changetype: modify
+replace: msDS-UserDontExpirePassword
+msDS-UserDontExpirePassword: TRUE
+-

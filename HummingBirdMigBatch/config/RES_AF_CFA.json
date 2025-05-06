@@ -1,0 +1,23 @@
+{
+  "FileNetSecurityAction": {
+    "FileNetConnectionInfo": {
+    	 "UrlConnection": "http://hrgdmscmcoll.enelint.global:30622/wsi/FNCEWS40MTOM/",
+    	 "DomainName": "HRGDMS_COLL",
+    	 "ObjectStore": [
+    	 			{"symbolicName": "ECARPE_OBJ"}
+    	 ],
+    	 "UserName": "ECARPEBatchNoEventAction",
+    	 "UserPassword": "eCarpe$13c",
+    	 "JaasStanza": "FileNetP8WSI"
+    },
+   "DocumentCollectionDefinition": {
+   		 "Query": "select Id, CodiceSocieta from eCarpeDocumento where TipoCartella = 'CFA' and Id = '{E024AF62-0000-C318-9EE8-150187F0B0E0}'"   
+   },
+   "SecurityActionDefinition": [
+    	 			{"Action": "RemoveAclEntry", "GranteeName": "CN=RES_AF_$CodiceSocieta$,CN=Groups,CN=eCarpe,CN=Applications,CN=Groups,DC=ecarpe,DC=enel", "AccessType": "", "AccessMask": ""}
+    	 ],
+   "PostProcessActionDefinition": [
+    	 			{"Action": "SetStringProp", "SymbolicName": "HRBatchID", "Value": "RES_AF_CFA"}
+    	 ]
+  } 
+}

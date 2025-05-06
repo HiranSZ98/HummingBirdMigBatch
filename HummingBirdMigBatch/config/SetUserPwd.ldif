@@ -1,0 +1,30 @@
+dn: CN=AE14532,CN=Users,DC=ecarpe,DC=enel
+changetype: modify
+replace: unicodePwd
+unicodePwd::IgBMAGUAQwBhAHIAcABlACQAMgAwADEAMwAiAA==
+-
+dn: CN=AE14532,CN=Users,DC=ecarpe,DC=enel
+changetype: modify
+replace: msDS-UserAccountDisabled
+msDS-UserAccountDisabled: FALSE
+-
+dn: CN=AE14532,CN=Users,DC=ecarpe,DC=enel
+changetype: modify
+replace: msDS-UserDontExpirePassword
+msDS-UserDontExpirePassword: TRUE
+-
+dn: CN=AE14533,CN=Users,DC=ecarpe,DC=enel
+changetype: modify
+replace: unicodePwd
+unicodePwd::IgBMAGUAQwBhAHIAcABlACQAMgAwADEAMwAiAA==
+-
+dn: CN=AE14533,CN=Users,DC=ecarpe,DC=enel
+changetype: modify
+replace: msDS-UserAccountDisabled
+msDS-UserAccountDisabled: FALSE
+-
+dn: CN=AE14533,CN=Users,DC=ecarpe,DC=enel
+changetype: modify
+replace: msDS-UserDontExpirePassword
+msDS-UserDontExpirePassword: TRUE
+-

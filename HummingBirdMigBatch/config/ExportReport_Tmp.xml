@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<hrclasses>
+	<hrclass name="eCarpeDocumento" label="IT">
+		<property title="Società" name="codiceSocieta" />
+		<property title="Codice fiscale" name="codiceFiscale" />
+		<property title="Tipo cartella" name="tipoCartella" />
+		<property title="Tipo documento" name="codiceTipoDocumento" />
+		<property title="Periodo" name="periodoDiRiferimento" />
+		<property title="UAMP" name="codiceUAMP" />
+		<property title="Raggruppamento amministrativo" name="codiceRaggAmm"/>
+		<property title="Cognome" name="cognomeUtente"/>
+		<property title="Nome" name="nomeUtente"/>
+		<property title="CID" name="CID"/>
+		<property title="Nome file" name="downloadedFileName" />
+		<property title="Dimensione (bytes)" name="contentSize" />
+	</hrclass>
+	<hrclass name="HRGDMSDocument" label="Global">
+		<property title="Società" name="codiceSocieta" />
+		<property title="Codice fiscale" name="codiceFiscale" />
+		<property title="Tipo documento" name="docType" />
+		<property title="Periodo" name="periodoDiRiferimento" />
+		<property title="Cognome" name="cognomeUtente"/>
+		<property title="Nome" name="nomeUtente"/>
+		<property title="SuperCID" name="superCID"/>
+		<property title="Nome file" name="downloadedFileName" />
+		<property title="Dimensione (bytes)" name="contentSize" />
+	</hrclass>
+</hrclasses>
+
+
+	
