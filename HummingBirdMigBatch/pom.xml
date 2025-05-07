@@ -129,7 +129,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.enel.hrgdms.batch.main.BatchStarter</mainClass>
+                            <mainClass>com.terna.hummingbird.batch.main.BatchStarter</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

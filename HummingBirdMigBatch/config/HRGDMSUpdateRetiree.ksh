@@ -97,7 +97,7 @@ else
 	### Avvio programma JAVA ###
 	############################
 
-	${JAVA_HOME}/bin/java -Xms256m -Xmx1024m -DHRGDMSUpdateRetiree.properties=/appl/HRGDMS/eCarpe-config/HRGDMSUpdateRetiree.properties -Dlog4j.configuration=log4j.${NOMESCRIPT}.properties com.enel.hrgdms.batch.main.BatchStarter ${TIPOELAB} ${DATAULTIMAMODIFICA}
+	${JAVA_HOME}/bin/java -Xms256m -Xmx1024m -DHRGDMSUpdateRetiree.properties=/appl/HRGDMS/eCarpe-config/HRGDMSUpdateRetiree.properties -Dlog4j.configuration=log4j.${NOMESCRIPT}.properties main.com.enel.hummingbird.batch.BatchStarter ${TIPOELAB} ${DATAULTIMAMODIFICA}
 	RC=$?
 fi
 

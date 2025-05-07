@@ -1,25 +1,25 @@
-15.07.2019 16:42:22 269; main; (BatchStarter.java:main:28) INFO  com.enel.hrgdms.batch.main.BatchStarter - HRGDMSBatch 1.0.0 del 27/02/2019
-15.07.2019 16:42:22 273; main; (BatchStarter.java:main:29) DEBUG com.enel.hrgdms.batch.main.BatchStarter - Inizializzazione operazione
-15.07.2019 16:42:22 276; main; (Batch.java:execute:20) DEBUG com.enel.hrgdms.batch.main.Batch - Tipo operazione: BATCH_IMPORT
-15.07.2019 16:42:22 283; main; (ModuloFactory.java:getModulo:27) INFO  com.enel.hrgdms.batch.main.BatchStarter - ***** Parametri in ingresso *****
-15.07.2019 16:42:22 283; main; (ModuloFactory.java:getModulo:28) INFO  com.enel.hrgdms.batch.main.BatchStarter - Tipo operazione --->BATCH_IMPORT<---
+15.07.2019 16:42:22 269; main; (BatchStarter.java:main:28) INFO  main.com.enel.hummingbird.batch.BatchStarter - HRGDMSBatch 1.0.0 del 27/02/2019
+15.07.2019 16:42:22 273; main; (BatchStarter.java:main:29) DEBUG main.com.enel.hummingbird.batch.BatchStarter - Inizializzazione operazione
+15.07.2019 16:42:22 276; main; (Batch.java:execute:20) DEBUG main.com.enel.hummingbird.batch.Batch - Tipo operazione: BATCH_IMPORT
+15.07.2019 16:42:22 283; main; (ModuloFactory.java:getModulo:27) INFO  main.com.enel.hummingbird.batch.BatchStarter - ***** Parametri in ingresso *****
+15.07.2019 16:42:22 283; main; (ModuloFactory.java:getModulo:28) INFO  main.com.enel.hummingbird.batch.BatchStarter - Tipo operazione --->BATCH_IMPORT<---
 15.07.2019 16:42:22 287; main; (ConfigReader.java:getProperties:224) DEBUG com.enel.hrgdms.batch.conf - Inizio recupero delle properties dal file di configurazione esterno
 15.07.2019 16:42:22 290; main; (ConfigReader.java:getInputStreamExternalPropertiesFile:264) DEBUG com.enel.hrgdms.batch.conf - PathFile=C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\HRGDMSImport.properties
 15.07.2019 16:42:22 292; main; (ConfigReader.java:getInputStreamExternalPropertiesFile:267) DEBUG com.enel.hrgdms.batch.conf - Provo il recupero del file di properties con FileInputStream
 15.07.2019 16:42:22 293; main; (ConfigReader.java:getProperties:227) INFO  com.enel.hrgdms.batch.conf - Individuato il file di properties esterno
-15.07.2019 16:42:22 297; main; (BatchStarter.java:main:38) ERROR com.enel.hrgdms.batch.main.BatchStarter - Esecuzione fallita :null
+15.07.2019 16:42:22 297; main; (BatchStarter.java:main:38) ERROR main.com.enel.hummingbird.batch.BatchStarter - Esecuzione fallita :null
 java.lang.ExceptionInInitializerError
-	at com.enel.hrgdms.batch.modulo.ModuloFactory.getModulo(ModuloFactory.java:72)
-	at com.enel.hrgdms.batch.main.Batch.execute(Batch.java:25)
-	at com.enel.hrgdms.batch.main.BatchStarter.main(BatchStarter.java:32)
+	at modulo.com.enel.hummingbird.batch.ModuloFactory.getModulo(ModuloFactory.java:72)
+	at main.com.enel.hummingbird.batch.Batch.execute(Batch.java:25)
+	at main.com.enel.hummingbird.batch.BatchStarter.main(BatchStarter.java:32)
 Caused by: java.lang.NullPointerException
 	at com.enel.hrgdms.batch.modulo.ModuloImport.<clinit>(ModuloImport.java:32)
 	... 3 more
-15.07.2019 16:43:14 818; main; (BatchStarter.java:main:28) INFO  com.enel.hrgdms.batch.main.BatchStarter - HRGDMSBatch 1.0.0 del 27/02/2019
-15.07.2019 16:43:14 821; main; (BatchStarter.java:main:29) DEBUG com.enel.hrgdms.batch.main.BatchStarter - Inizializzazione operazione
-15.07.2019 16:43:14 823; main; (Batch.java:execute:20) DEBUG com.enel.hrgdms.batch.main.Batch - Tipo operazione: BATCH_IMPORT
-15.07.2019 16:43:14 829; main; (ModuloFactory.java:getModulo:27) INFO  com.enel.hrgdms.batch.main.BatchStarter - ***** Parametri in ingresso *****
-15.07.2019 16:43:14 829; main; (ModuloFactory.java:getModulo:28) INFO  com.enel.hrgdms.batch.main.BatchStarter - Tipo operazione --->BATCH_IMPORT<---
+15.07.2019 16:43:14 818; main; (BatchStarter.java:main:28) INFO  main.com.enel.hummingbird.batch.BatchStarter - HRGDMSBatch 1.0.0 del 27/02/2019
+15.07.2019 16:43:14 821; main; (BatchStarter.java:main:29) DEBUG main.com.enel.hummingbird.batch.BatchStarter - Inizializzazione operazione
+15.07.2019 16:43:14 823; main; (Batch.java:execute:20) DEBUG main.com.enel.hummingbird.batch.Batch - Tipo operazione: BATCH_IMPORT
+15.07.2019 16:43:14 829; main; (ModuloFactory.java:getModulo:27) INFO  main.com.enel.hummingbird.batch.BatchStarter - ***** Parametri in ingresso *****
+15.07.2019 16:43:14 829; main; (ModuloFactory.java:getModulo:28) INFO  main.com.enel.hummingbird.batch.BatchStarter - Tipo operazione --->BATCH_IMPORT<---
 15.07.2019 16:43:14 833; main; (ConfigReader.java:getProperties:224) DEBUG com.enel.hrgdms.batch.conf - Inizio recupero delle properties dal file di configurazione esterno
 15.07.2019 16:43:14 838; main; (ConfigReader.java:getInputStreamExternalPropertiesFile:264) DEBUG com.enel.hrgdms.batch.conf - PathFile=C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\HRGDMSImport.properties
 15.07.2019 16:43:14 839; main; (ConfigReader.java:getInputStreamExternalPropertiesFile:267) DEBUG com.enel.hrgdms.batch.conf - Provo il recupero del file di properties con FileInputStream
@@ -27,52 +27,52 @@ Caused by: java.lang.NullPointerException
 15.07.2019 16:43:14 843; main; (ModuloImport.java:preExecute:50) INFO  com.enel.hrgdms.batch.modulo.ModuloImport - Esecuzione preExecute Modulo ModuloImport
 15.07.2019 16:43:14 844; main; (ModuloImport.java:execute:62) INFO  com.enel.hrgdms.batch.modulo.ModuloImport - Esecuzione Modulo ModuloImport
 15.07.2019 16:43:14 844; main; (ModuloImport.java:postExecute:74) INFO  com.enel.hrgdms.batch.modulo.ModuloImport - Esecuzione postExecute Modulo ModuloImport
-15.07.2019 16:43:14 844; main; (Batch.java:execute:34) INFO  com.enel.hrgdms.batch.main.Batch - Operazione per Modulo ModuloImport completata, inizio verifica esito.
-15.07.2019 16:56:27 715; main; (BatchStarter.java:main:28) INFO  com.enel.hrgdms.batch.main.BatchStarter - HRGDMSBatch 1.0.0 del 27/02/2019
-15.07.2019 16:56:27 718; main; (BatchStarter.java:main:29) DEBUG com.enel.hrgdms.batch.main.BatchStarter - Inizializzazione operazione
-15.07.2019 16:56:27 721; main; (Batch.java:execute:24) DEBUG com.enel.hrgdms.batch.main.Batch - Tipo operazione: BATCH_IMPORT
-15.07.2019 16:56:27 728; main; (ModuloFactory.java:getModulo:27) INFO  com.enel.hrgdms.batch.main.BatchStarter - ***** Parametri in ingresso *****
-15.07.2019 16:56:27 728; main; (ModuloFactory.java:getModulo:28) INFO  com.enel.hrgdms.batch.main.BatchStarter - Tipo operazione --->BATCH_IMPORT<---
+15.07.2019 16:43:14 844; main; (Batch.java:execute:34) INFO  main.com.enel.hummingbird.batch.Batch - Operazione per Modulo ModuloImport completata, inizio verifica esito.
+15.07.2019 16:56:27 715; main; (BatchStarter.java:main:28) INFO  main.com.enel.hummingbird.batch.BatchStarter - HRGDMSBatch 1.0.0 del 27/02/2019
+15.07.2019 16:56:27 718; main; (BatchStarter.java:main:29) DEBUG main.com.enel.hummingbird.batch.BatchStarter - Inizializzazione operazione
+15.07.2019 16:56:27 721; main; (Batch.java:execute:24) DEBUG main.com.enel.hummingbird.batch.Batch - Tipo operazione: BATCH_IMPORT
+15.07.2019 16:56:27 728; main; (ModuloFactory.java:getModulo:27) INFO  main.com.enel.hummingbird.batch.BatchStarter - ***** Parametri in ingresso *****
+15.07.2019 16:56:27 728; main; (ModuloFactory.java:getModulo:28) INFO  main.com.enel.hummingbird.batch.BatchStarter - Tipo operazione --->BATCH_IMPORT<---
 15.07.2019 16:56:27 731; main; (ConfigReader.java:getProperties:224) DEBUG com.enel.hrgdms.batch.conf - Inizio recupero delle properties dal file di configurazione esterno
 15.07.2019 16:56:27 734; main; (ConfigReader.java:getInputStreamExternalPropertiesFile:264) DEBUG com.enel.hrgdms.batch.conf - PathFile=C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\HRGDMSImport.properties
 15.07.2019 16:56:27 734; main; (ConfigReader.java:getInputStreamExternalPropertiesFile:267) DEBUG com.enel.hrgdms.batch.conf - Provo il recupero del file di properties con FileInputStream
 15.07.2019 16:56:27 736; main; (ConfigReader.java:getProperties:227) INFO  com.enel.hrgdms.batch.conf - Individuato il file di properties esterno
 15.07.2019 16:56:27 751; main; (ModuloImport.java:inizialize:45) INFO  com.enel.hrgdms.batch.modulo.ModuloImport - Parsing command line [BATCH_IMPORT]
-15.07.2019 16:56:27 761; main; (BatchUtil.java:parseCommandLine:360) ERROR com.enel.hrgdms.batch.util.BatchUtil - org.apache.commons.cli.MissingOptionException: Missing required option: docdir
+15.07.2019 16:56:27 761; main; (BatchUtil.java:parseCommandLine:360) ERROR util.com.enel.hummingbird.batch.BatchUtil - org.apache.commons.cli.MissingOptionException: Missing required option: docdir
 15.07.2019 16:56:27 762; main; (ModuloImport.java:inizialize:49) ERROR com.enel.hrgdms.batch.modulo.ModuloImport - Missing required option: docdir
-com.enel.hrgdms.batch.exception.BatchException: Missing required option: docdir
-	at com.enel.hrgdms.batch.util.BatchUtil.parseCommandLine(BatchUtil.java:361)
+exception.com.enel.hummingbird.batch.BatchException: Missing required option: docdir
+	at util.com.enel.hummingbird.batch.BatchUtil.parseCommandLine(BatchUtil.java:361)
 	at com.enel.hrgdms.batch.modulo.ModuloImport.inizialize(ModuloImport.java:46)
-	at com.enel.hrgdms.batch.main.Batch.execute(Batch.java:33)
-	at com.enel.hrgdms.batch.main.BatchStarter.main(BatchStarter.java:32)
-15.07.2019 16:56:27 766; main; (Batch.java:execute:51) ERROR com.enel.hrgdms.batch.main.Batch - Operazione Modulo ModuloImport interrotta.
-15.07.2019 16:56:27 767; main; (Batch.java:execute:52) ERROR com.enel.hrgdms.batch.main.Batch - Numero di record elaborati con successo prima dell'interruzione= 0000000000
-15.07.2019 16:56:27 768; main; (BatchStarter.java:main:35) ERROR com.enel.hrgdms.batch.main.BatchStarter - Esecuzione fallita :Missing required option: docdir
-15.07.2019 16:56:54 971; main; (BatchStarter.java:main:28) INFO  com.enel.hrgdms.batch.main.BatchStarter - HRGDMSBatch 1.0.0 del 27/02/2019
-15.07.2019 16:56:54 974; main; (BatchStarter.java:main:29) DEBUG com.enel.hrgdms.batch.main.BatchStarter - Inizializzazione operazione
-15.07.2019 16:56:54 976; main; (Batch.java:execute:24) DEBUG com.enel.hrgdms.batch.main.Batch - Tipo operazione: BATCH_IMPORT
-15.07.2019 16:56:54 982; main; (ModuloFactory.java:getModulo:27) INFO  com.enel.hrgdms.batch.main.BatchStarter - ***** Parametri in ingresso *****
-15.07.2019 16:56:54 983; main; (ModuloFactory.java:getModulo:28) INFO  com.enel.hrgdms.batch.main.BatchStarter - Tipo operazione --->BATCH_IMPORT<---
+	at main.com.enel.hummingbird.batch.Batch.execute(Batch.java:33)
+	at main.com.enel.hummingbird.batch.BatchStarter.main(BatchStarter.java:32)
+15.07.2019 16:56:27 766; main; (Batch.java:execute:51) ERROR main.com.enel.hummingbird.batch.Batch - Operazione Modulo ModuloImport interrotta.
+15.07.2019 16:56:27 767; main; (Batch.java:execute:52) ERROR main.com.enel.hummingbird.batch.Batch - Numero di record elaborati con successo prima dell'interruzione= 0000000000
+15.07.2019 16:56:27 768; main; (BatchStarter.java:main:35) ERROR main.com.enel.hummingbird.batch.BatchStarter - Esecuzione fallita :Missing required option: docdir
+15.07.2019 16:56:54 971; main; (BatchStarter.java:main:28) INFO  main.com.enel.hummingbird.batch.BatchStarter - HRGDMSBatch 1.0.0 del 27/02/2019
+15.07.2019 16:56:54 974; main; (BatchStarter.java:main:29) DEBUG main.com.enel.hummingbird.batch.BatchStarter - Inizializzazione operazione
+15.07.2019 16:56:54 976; main; (Batch.java:execute:24) DEBUG main.com.enel.hummingbird.batch.Batch - Tipo operazione: BATCH_IMPORT
+15.07.2019 16:56:54 982; main; (ModuloFactory.java:getModulo:27) INFO  main.com.enel.hummingbird.batch.BatchStarter - ***** Parametri in ingresso *****
+15.07.2019 16:56:54 983; main; (ModuloFactory.java:getModulo:28) INFO  main.com.enel.hummingbird.batch.BatchStarter - Tipo operazione --->BATCH_IMPORT<---
 15.07.2019 16:56:54 987; main; (ConfigReader.java:getProperties:224) DEBUG com.enel.hrgdms.batch.conf - Inizio recupero delle properties dal file di configurazione esterno
 15.07.2019 16:56:54 991; main; (ConfigReader.java:getInputStreamExternalPropertiesFile:264) DEBUG com.enel.hrgdms.batch.conf - PathFile=C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\HRGDMSImport.properties
 15.07.2019 16:56:54 992; main; (ConfigReader.java:getInputStreamExternalPropertiesFile:267) DEBUG com.enel.hrgdms.batch.conf - Provo il recupero del file di properties con FileInputStream
 15.07.2019 16:56:54 993; main; (ConfigReader.java:getProperties:227) INFO  com.enel.hrgdms.batch.conf - Individuato il file di properties esterno
 15.07.2019 16:56:54 999; main; (ModuloImport.java:inizialize:45) INFO  com.enel.hrgdms.batch.modulo.ModuloImport - Parsing command line [BATCH_IMPORT, -docdir]
-15.07.2019 16:56:55 009; main; (BatchUtil.java:parseCommandLine:360) ERROR com.enel.hrgdms.batch.util.BatchUtil - org.apache.commons.cli.MissingArgumentException: Missing argument for option: docdir
+15.07.2019 16:56:55 009; main; (BatchUtil.java:parseCommandLine:360) ERROR util.com.enel.hummingbird.batch.BatchUtil - org.apache.commons.cli.MissingArgumentException: Missing argument for option: docdir
 15.07.2019 16:56:55 010; main; (ModuloImport.java:inizialize:49) ERROR com.enel.hrgdms.batch.modulo.ModuloImport - Missing argument for option: docdir
-com.enel.hrgdms.batch.exception.BatchException: Missing argument for option: docdir
-	at com.enel.hrgdms.batch.util.BatchUtil.parseCommandLine(BatchUtil.java:361)
+exception.com.enel.hummingbird.batch.BatchException: Missing argument for option: docdir
+	at util.com.enel.hummingbird.batch.BatchUtil.parseCommandLine(BatchUtil.java:361)
 	at com.enel.hrgdms.batch.modulo.ModuloImport.inizialize(ModuloImport.java:46)
-	at com.enel.hrgdms.batch.main.Batch.execute(Batch.java:33)
-	at com.enel.hrgdms.batch.main.BatchStarter.main(BatchStarter.java:32)
-15.07.2019 16:56:55 013; main; (Batch.java:execute:51) ERROR com.enel.hrgdms.batch.main.Batch - Operazione Modulo ModuloImport interrotta.
-15.07.2019 16:56:55 013; main; (Batch.java:execute:52) ERROR com.enel.hrgdms.batch.main.Batch - Numero di record elaborati con successo prima dell'interruzione= 0000000000
-15.07.2019 16:56:55 015; main; (BatchStarter.java:main:35) ERROR com.enel.hrgdms.batch.main.BatchStarter - Esecuzione fallita :Missing argument for option: docdir
-15.07.2019 16:57:14 883; main; (BatchStarter.java:main:28) INFO  com.enel.hrgdms.batch.main.BatchStarter - HRGDMSBatch 1.0.0 del 27/02/2019
-15.07.2019 16:57:14 886; main; (BatchStarter.java:main:29) DEBUG com.enel.hrgdms.batch.main.BatchStarter - Inizializzazione operazione
-15.07.2019 16:57:14 889; main; (Batch.java:execute:24) DEBUG com.enel.hrgdms.batch.main.Batch - Tipo operazione: BATCH_IMPORT
-15.07.2019 16:57:14 897; main; (ModuloFactory.java:getModulo:27) INFO  com.enel.hrgdms.batch.main.BatchStarter - ***** Parametri in ingresso *****
-15.07.2019 16:57:14 898; main; (ModuloFactory.java:getModulo:28) INFO  com.enel.hrgdms.batch.main.BatchStarter - Tipo operazione --->BATCH_IMPORT<---
+	at main.com.enel.hummingbird.batch.Batch.execute(Batch.java:33)
+	at main.com.enel.hummingbird.batch.BatchStarter.main(BatchStarter.java:32)
+15.07.2019 16:56:55 013; main; (Batch.java:execute:51) ERROR main.com.enel.hummingbird.batch.Batch - Operazione Modulo ModuloImport interrotta.
+15.07.2019 16:56:55 013; main; (Batch.java:execute:52) ERROR main.com.enel.hummingbird.batch.Batch - Numero di record elaborati con successo prima dell'interruzione= 0000000000
+15.07.2019 16:56:55 015; main; (BatchStarter.java:main:35) ERROR main.com.enel.hummingbird.batch.BatchStarter - Esecuzione fallita :Missing argument for option: docdir
+15.07.2019 16:57:14 883; main; (BatchStarter.java:main:28) INFO  main.com.enel.hummingbird.batch.BatchStarter - HRGDMSBatch 1.0.0 del 27/02/2019
+15.07.2019 16:57:14 886; main; (BatchStarter.java:main:29) DEBUG main.com.enel.hummingbird.batch.BatchStarter - Inizializzazione operazione
+15.07.2019 16:57:14 889; main; (Batch.java:execute:24) DEBUG main.com.enel.hummingbird.batch.Batch - Tipo operazione: BATCH_IMPORT
+15.07.2019 16:57:14 897; main; (ModuloFactory.java:getModulo:27) INFO  main.com.enel.hummingbird.batch.BatchStarter - ***** Parametri in ingresso *****
+15.07.2019 16:57:14 898; main; (ModuloFactory.java:getModulo:28) INFO  main.com.enel.hummingbird.batch.BatchStarter - Tipo operazione --->BATCH_IMPORT<---
 15.07.2019 16:57:14 901; main; (ConfigReader.java:getProperties:224) DEBUG com.enel.hrgdms.batch.conf - Inizio recupero delle properties dal file di configurazione esterno
 15.07.2019 16:57:14 905; main; (ConfigReader.java:getInputStreamExternalPropertiesFile:264) DEBUG com.enel.hrgdms.batch.conf - PathFile=C:\Projects\Enel\Gara_Innovazione\Global_HR_DMS\src\HRGDMSBatch\config\HRGDMSImport.properties
 15.07.2019 16:57:14 905; main; (ConfigReader.java:getInputStreamExternalPropertiesFile:267) DEBUG com.enel.hrgdms.batch.conf - Provo il recupero del file di properties con FileInputStream
@@ -81,4 +81,4 @@ com.enel.hrgdms.batch.exception.BatchException: Missing argument for option: doc
 15.07.2019 16:57:14 940; main; (ModuloImport.java:preExecute:57) INFO  com.enel.hrgdms.batch.modulo.ModuloImport - Esecuzione preExecute Modulo ModuloImport
 15.07.2019 16:57:14 941; main; (ModuloImport.java:execute:70) INFO  com.enel.hrgdms.batch.modulo.ModuloImport - Esecuzione Modulo ModuloImport
 15.07.2019 16:57:14 941; main; (ModuloImport.java:postExecute:82) INFO  com.enel.hrgdms.batch.modulo.ModuloImport - Esecuzione postExecute Modulo ModuloImport
-15.07.2019 16:57:14 941; main; (Batch.java:execute:39) INFO  com.enel.hrgdms.batch.main.Batch - Operazione per Modulo ModuloImport completata, inizio verifica esito.
+15.07.2019 16:57:14 941; main; (Batch.java:execute:39) INFO  main.com.enel.hummingbird.batch.Batch - Operazione per Modulo ModuloImport completata, inizio verifica esito.

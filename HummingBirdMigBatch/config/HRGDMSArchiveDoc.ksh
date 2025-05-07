@@ -110,7 +110,7 @@ echo "==========================================================================
 	### Avvio programma JAVA ###
 	############################
 
-	${JAVA_HOME}/bin/java -Xms256m -Xmx1024m -DHRGDMSArchiveDoc.properties=/appl/HRGDMS/eCarpe-config/HRGDMSArchiveDoc.properties -Dlog4j.configuration=log4j.${NOMESCRIPT}.properties com.enel.hrgdms.batch.main.BatchStarter ${TIPOELAB} ${2} ${3} ${4} ${5} ${6} ${7} ${8} ${9}
+	${JAVA_HOME}/bin/java -Xms256m -Xmx1024m -DHRGDMSArchiveDoc.properties=/appl/HRGDMS/eCarpe-config/HRGDMSArchiveDoc.properties -Dlog4j.configuration=log4j.${NOMESCRIPT}.properties main.com.enel.hummingbird.batch.BatchStarter ${TIPOELAB} ${2} ${3} ${4} ${5} ${6} ${7} ${8} ${9}
 	RC=$?
 #fi
 
