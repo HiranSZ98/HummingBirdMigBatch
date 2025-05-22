@@ -1,0 +1,1 @@
+https://archiviomigrationappnew-ctfmejg6c8cxgmcd.westeurope-01.azurewebsites.net/swagger/index.html

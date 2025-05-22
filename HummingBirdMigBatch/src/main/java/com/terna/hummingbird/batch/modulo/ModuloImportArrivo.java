@@ -49,20 +49,16 @@ public class ModuloImportArrivo implements Modulo {
 
 			String headerLine = scanner.nextLine();
 			String[] headers = headerLine.split(",", -1);
-
+			Map<String, String> jsonMap = new LinkedHashMap<>();
 			while (scanner.hasNext()) {
 				String line = scanner.nextLine();
 				String[] values = line.split(",", -1);
-
-				Map<String, String> jsonMap = new LinkedHashMap<>();
 				for (int i=0; i < headers.length && i < values.length; i++) {
 					jsonMap.put(headers[i].trim(), values[i].trim());
 				}
-
-					String json = objectMapper.writeValueAsString(jsonMap);
-					payloads.add(json);
-					log.info("Payload: " + json);
 			}
+
+
 
 			scanner.close();
 			num_rows = payloads.size();
