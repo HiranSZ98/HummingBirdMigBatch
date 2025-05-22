@@ -15,9 +15,13 @@ public class ModuloImportArrivo implements Modulo {
 
 	private static Logger log = Logger.getLogger(ModuloImportArrivo.class);
 	public static final String module_name = "ModuloImportArrivo";
+	public String nome_lotto_prefix = "DOC_A_";
+	public String nome_lotto_postfix = "";
+	public String nome_lotto = "";
+	public String file_name = "";
 	private Reporter reporter;
 	private int num_rows = 0;
-	private String csvPath = "lotti/DocumentiInArrivo2009RegistroTeaotna.csv";
+	private String csvPath = "C:\\Projects\\terma\\esatrazioni\\Lotti";
 
 	private List<String> payloads = new ArrayList<>();
 
@@ -25,8 +29,13 @@ public class ModuloImportArrivo implements Modulo {
 	// Initialize
 	@Override
 	public void inizialize(Map<Integer, String> task) throws BatchException {
-		log.info("Esecuzione inizialize Modulo " + module_name);
-		this.reporter = ReporterFactory.getReporter("Modulo " + module_name);
+		log.info("Esecuzione inizialize Modulo " + module_name + " lotto " + task.get(1));
+		reporter = ReporterFactory.getReporter("Modulo " + module_name);
+		nome_lotto_postfix = task.get(1);
+		nome_lotto = nome_lotto_prefix + nome_lotto_postfix;
+		file_name = csvPath + "\\" + nome_lotto + "\\" + nome_lotto + ".csv";
+		log.info(nome_lotto + " file name " + file_name);
+
 	}
 
 	// preExecute
@@ -35,8 +44,8 @@ public class ModuloImportArrivo implements Modulo {
 		log.info("Esecuzione preExecute Modulo " + module_name);
 
 		ObjectMapper objectMapper = new ObjectMapper();
-		try (Scanner scanner = new Scanner(new File(csvPath))){
-			log.info("Reading csv: " + csvPath);
+		try (Scanner scanner = new Scanner(new File(file_name))){
+			log.info("Reading csv: " + file_name);
 
 			String headerLine = scanner.nextLine();
 			String[] headers = headerLine.split(",", -1);
