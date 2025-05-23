@@ -5,6 +5,7 @@ import com.terna.hummingbird.batch.common.ReporterFactory;
 import com.terna.hummingbird.batch.exception.BatchException;
 import com.terna.hummingbird.batch.exception.ExitCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.terna.hummingbird.batch.model.DocumentArrivedPayload;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -21,10 +22,9 @@ public class ModuloImportArrivo implements Modulo {
 	public String file_name = "";
 	private Reporter reporter;
 	private int num_rows = 0;
-	private String csvPath = "C:\\Projects\\terma\\esatrazioni\\Lotti";
+	private String csvPath = "C:\\RjcSoft\\NTTData\\Terna\\Estrazioni\\Lotti";
 
-	private List<String> payloads = new ArrayList<>();
-
+	private List<DocumentArrivedPayload> documentPayLoads = new ArrayList<>();
 
 	// Initialize
 	@Override
@@ -35,7 +35,6 @@ public class ModuloImportArrivo implements Modulo {
 		nome_lotto = nome_lotto_prefix + nome_lotto_postfix;
 		file_name = csvPath + "\\" + nome_lotto + "\\" + nome_lotto + ".csv";
 		log.info(nome_lotto + " file name " + file_name);
-
 	}
 
 	// preExecute
@@ -49,19 +48,23 @@ public class ModuloImportArrivo implements Modulo {
 
 			String headerLine = scanner.nextLine();
 			String[] headers = headerLine.split(",", -1);
-			Map<String, String> jsonMap = new LinkedHashMap<>();
+
 			while (scanner.hasNext()) {
 				String line = scanner.nextLine();
 				String[] values = line.split(",", -1);
+
+				Map<String, String> jsonMap = new LinkedHashMap<>();
 				for (int i=0; i < headers.length && i < values.length; i++) {
 					jsonMap.put(headers[i].trim(), values[i].trim());
 				}
+
+					String json = objectMapper.writeValueAsString(jsonMap);
+					DocumentArrivedPayload payloadObj = objectMapper.readValue(json, DocumentArrivedPayload.class);
+					documentPayLoads.add(payloadObj);
+					log.info("Payload: " + json);
 			}
 
-
-
-			scanner.close();
-			num_rows = payloads.size();
+			num_rows = documentPayLoads.size();
 			log.info("Totale payloads generati: " + num_rows);
 
 		} catch (Exception e) {
@@ -74,7 +77,6 @@ public class ModuloImportArrivo implements Modulo {
 	@Override
 	public void execute() throws BatchException {
 		log.info("Esecuzione Modulo " + module_name);
-
 	}
 
 	// postExecute
@@ -102,8 +104,4 @@ public class ModuloImportArrivo implements Modulo {
 	public Integer getTotalRows() {
 		return null;
     }
-
-	public List<String> getPayloads() {
-		return payloads;
-	}
 }
