@@ -165,7 +165,7 @@ public class ModuloImportPartenza implements Modulo {
 				String url = "https://archiviomigrationappnew-ctfmejg6c8cxgmcd.westeurope-01.azurewebsites.net/api/v1.0/ArchivioMigration/CreateDocumentSent";
 				jsonDoc = jsonDoc.replace("abstractText", "abstract");
 				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url);
-				log.info("doc created: " +  objectMapper.writeValueAsString(response));
+				log.info("DOC CREATED: " +  objectMapper.writeValueAsString(response));
 				reporter.addSuccess();
 			} catch (Exception e) {
 				//TODO aggiungere riga errore (recovry)

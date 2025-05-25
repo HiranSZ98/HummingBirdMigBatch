@@ -102,7 +102,7 @@ public class BatchUtil {
 		FileToUpload fileBean = null;
 		File file = new File(filePath);
 		if (!file.exists())
-				file = new File("C:\\temp\\sample.txt");
+				file = new File("C:\\temp\\sample_01.pdf");
 		try {
 			byte[] fileBytes = Files.readAllBytes(file.toPath());
 			String base64Content = Base64.getEncoder().encodeToString(fileBytes);
