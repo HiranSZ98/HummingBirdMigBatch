@@ -4,6 +4,7 @@ public class FileToUpload {
     private String contentBase64;
     private String fileHash;
     private int fileSize;
+    private String filePath;
     private String nome;
     private String contentType;
 
@@ -45,5 +46,13 @@ public class FileToUpload {
 
     public void setContentType(String contentType) {
         this.contentType = contentType;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 }

@@ -1,15 +1,15 @@
 package com.terna.hummingbird.batch.model;
 
-public class Mittente {
-    private int systemID;
+public class DestMitt {
+    private long systemID;
     private String code;
     private String description;
 
-    public int getSystemID() {
+    public long getSystemID() {
         return systemID;
     }
 
-    public void setSystemID(int systemID) {
+    public void setSystemID(long systemID) {
         this.systemID = systemID;
     }
 

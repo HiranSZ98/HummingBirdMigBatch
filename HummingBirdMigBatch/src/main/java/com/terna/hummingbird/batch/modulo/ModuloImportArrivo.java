@@ -22,7 +22,8 @@ public class ModuloImportArrivo implements Modulo {
 	public String file_name = "";
 	private Reporter reporter;
 	private int num_rows = 0;
-	private String csvPath = "C:\\RjcSoft\\NTTData\\Terna\\Estrazioni\\Lotti";
+	//private String csvPath = "C:\\RjcSoft\\NTTData\\Terma\\Estrazioni\\Lotti";
+	private String csvPath = "C:\\Projects\\terma\\esatrazioni\\Lotti";
 
 	private List<DocumentArrivedPayload> documentPayLoads = new ArrayList<>();
 
@@ -58,10 +59,6 @@ public class ModuloImportArrivo implements Modulo {
 					jsonMap.put(headers[i].trim(), values[i].trim());
 				}
 
-					String json = objectMapper.writeValueAsString(jsonMap);
-					DocumentArrivedPayload payloadObj = objectMapper.readValue(json, DocumentArrivedPayload.class);
-					documentPayLoads.add(payloadObj);
-					log.info("Payload: " + json);
 			}
 
 			num_rows = documentPayLoads.size();

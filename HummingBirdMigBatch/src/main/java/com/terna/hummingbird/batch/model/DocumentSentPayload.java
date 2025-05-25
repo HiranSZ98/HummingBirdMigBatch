@@ -1,38 +1,34 @@
 package com.terna.hummingbird.batch.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.time.Instant;
 import java.util.List;
 
-public class DocumentArrivedPayload {
+public class DocumentSentPayload {
     private String idLotto;
     private FileToUpload fileToUpload;
     private String version;
-    private int systemId;
-    private int docNumber;
+    private long systemId;
+    private long docNumber;
     private String docNameObject;
     private Instant creationDate;
     private String status;
-
-    @JsonProperty("abstract")
-    private String abstractText; // 'abstract' is a reserved word
+    private String abstractText;
     private String annullato;
     private String autAnnullamento;
     private int autAnnullamentoId;
     private Instant dataAnn;
     private String docType;
     private String author;
-    private int authorId;
+    private long authorId;
     private int numeroAllegati;
     private Instant dataProtocollo;
-    private int numeroProtocollo;
+    private long numeroProtocollo;
     private String tipoProtocollo;
     private String codiceRegistro;
     private List<AclEntry> acl;
-    private Instant dataProtocolloRicevuto;
-    private String numeroProtocolloRicevuto;
-    private List<DestMitt> mittenti;
+    private Instant dataSpedizione;
+    private String tipoSpedizione;
+    private List<DestMitt> destinatari;
 
     public String getIdLotto() {
         return idLotto;
@@ -58,19 +54,19 @@ public class DocumentArrivedPayload {
         this.version = version;
     }
 
-    public int getSystemId() {
+    public long getSystemId() {
         return systemId;
     }
 
-    public void setSystemId(int systemId) {
+    public void setSystemId(long systemId) {
         this.systemId = systemId;
     }
 
-    public int getDocNumber() {
+    public long getDocNumber() {
         return docNumber;
     }
 
-    public void setDocNumber(int docNumber) {
+    public void setDocNumber(long docNumber) {
         this.docNumber = docNumber;
     }
 
@@ -98,12 +94,10 @@ public class DocumentArrivedPayload {
         this.status = status;
     }
 
-    @JsonProperty("abstract")
     public String getAbstractText() {
         return abstractText;
     }
 
-    @JsonProperty("abstract")
     public void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
     }
@@ -156,11 +150,11 @@ public class DocumentArrivedPayload {
         this.author = author;
     }
 
-    public int getAuthorId() {
+    public long getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(int authorId) {
+    public void setAuthorId(long authorId) {
         this.authorId = authorId;
     }
 
@@ -180,11 +174,11 @@ public class DocumentArrivedPayload {
         this.dataProtocollo = dataProtocollo;
     }
 
-    public int getNumeroProtocollo() {
+    public long getNumeroProtocollo() {
         return numeroProtocollo;
     }
 
-    public void setNumeroProtocollo(int numeroProtocollo) {
+    public void setNumeroProtocollo(long numeroProtocollo) {
         this.numeroProtocollo = numeroProtocollo;
     }
 
@@ -212,27 +206,27 @@ public class DocumentArrivedPayload {
         this.acl = acl;
     }
 
-    public Instant getDataProtocolloRicevuto() {
-        return dataProtocolloRicevuto;
+    public Instant getDataSpedizione() {
+        return dataSpedizione;
     }
 
-    public void setDataProtocolloRicevuto(Instant dataProtocolloRicevuto) {
-        this.dataProtocolloRicevuto = dataProtocolloRicevuto;
+    public void setDataSpedizione(Instant dataSpedizione) {
+        this.dataSpedizione = dataSpedizione;
     }
 
-    public String getNumeroProtocolloRicevuto() {
-        return numeroProtocolloRicevuto;
+    public String getTipoSpedizione() {
+        return tipoSpedizione;
     }
 
-    public void setNumeroProtocolloRicevuto(String numeroProtocolloRicevuto) {
-        this.numeroProtocolloRicevuto = numeroProtocolloRicevuto;
+    public void setTipoSpedizione(String tipoSpedizione) {
+        this.tipoSpedizione = tipoSpedizione;
     }
 
-    public List<DestMitt> getMittenti() {
-        return mittenti;
+    public List<DestMitt> getDestinatari() {
+        return destinatari;
     }
 
-    public void setMittenti(List<DestMitt> mittenti) {
-        this.mittenti = mittenti;
+    public void setDestinatari(List<DestMitt> destinatari) {
+        this.destinatari = destinatari;
     }
 }

@@ -1,23 +1,24 @@
 package com.terna.hummingbird.batch.model;
 
 public class AclEntry {
-    private int systemID;
-    private int groupID;
+    private long systemID;
+    private long groupID;
     private String description;
 
-    public int getSystemID() {
+
+    public long getSystemID() {
         return systemID;
     }
 
-    public void setSystemID(int systemID) {
+    public void setSystemID(long systemID) {
         this.systemID = systemID;
     }
 
-    public int getGroupID() {
+    public long getGroupID() {
         return groupID;
     }
 
-    public void setGroupID(int groupID) {
+    public void setGroupID(long groupID) {
         this.groupID = groupID;
     }
 
