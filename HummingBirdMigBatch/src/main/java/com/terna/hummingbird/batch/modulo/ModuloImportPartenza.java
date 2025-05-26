@@ -36,8 +36,8 @@ public class ModuloImportPartenza implements Modulo {
 	private Reporter reporter;
 	private ObjectMapper objectMapper;
 	private int num_rows = 0;
-	//private String csvPath = "C:\\RjcSoft\\NTTData\\Terna\\Estrazioni\\Lotti";
-	private String csvPath = "C:\\Projects\\terma\\estrazioni\\Lotti";
+	private String csvPath = "C:\\RjcSoft\\NTTData\\Terna\\Estrazioni\\Lotti";
+	//private String csvPath = "C:\\Projects\\terma\\estrazioni\\Lotti";
 
 	private Map<String, List<AclEntry>> aclMap = new HashMap<String, List<AclEntry>>();
 	private Map<String, List<DestMitt>> dmMap = new HashMap<String, List<DestMitt>>();
@@ -99,8 +99,8 @@ public class ModuloImportPartenza implements Modulo {
 				// Split line into fields
 				String[] line = record.split(",", -1); // -1 to keep empty strings
 				try {
-					long systemId = Long.parseLong(line[4]);
-					long docNumber = Long.parseLong(line[5]);
+					String systemId = line[4];
+					String docNumber = line[5];
 					log.info("Processing docNumber: " + docNumber);
 
 					DocumentSentPayload doc = new DocumentSentPayload();
@@ -118,8 +118,7 @@ public class ModuloImportPartenza implements Modulo {
 					doc.setCreationDate(BatchUtil.convertDate(line[7]));
 					doc.setStatus(line[9]);
 
-					String sAbstract = StringUtils.isEmpty(line[10]) ? doc.getDocNameObject() : line[10];
-					doc.setAbstractText(sAbstract);
+					doc.setAbstractText(line[10]);
 					doc.setAnnullato(line[11]);
 					doc.setAutAnnullamento(line[12]);
 					//doc.setAutAnnullamentoId(parseLong(line[13]));
@@ -129,11 +128,11 @@ public class ModuloImportPartenza implements Modulo {
 					doc.setAuthorId(BatchUtil.parseLong(line[17]));
 					doc.setNumeroAllegati(BatchUtil.parseInt(line[18]));
 					doc.setDataProtocollo(BatchUtil.convertDate(line[19]));
-					doc.setNumeroProtocollo(BatchUtil.parseLong(line[20]));
+					doc.setNumeroProtocollo(line[20]);
 					doc.setTipoProtocollo(line[21]);
 					doc.setCodiceRegistro(line[22]);
 
-					Instant dataSpedizione = StringUtils.isEmpty(line[23])? Instant.now() : BatchUtil.convertDate(line[23]);
+					Instant dataSpedizione = StringUtils.isEmpty(line[23])? null : BatchUtil.convertDate(line[23]);
 					doc.setDataSpedizione(dataSpedizione);
 					String tipoSpedizione = StringUtils.isEmpty(line[24])? "N/D":line[24];
 					doc.setTipoSpedizione(tipoSpedizione);
@@ -163,7 +162,6 @@ public class ModuloImportPartenza implements Modulo {
 				doc.setFileToUpload(BatchUtil.toFileToUpload(doc.getFileToUpload().getFilePath()));
 				String jsonDoc = objectMapper.writeValueAsString(doc);
 				String url = "https://archiviomigrationappnew-ctfmejg6c8cxgmcd.westeurope-01.azurewebsites.net/api/v1.0/ArchivioMigration/CreateDocumentSent";
-				jsonDoc = jsonDoc.replace("abstractText", "abstract");
 				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url);
 				log.info("DOC CREATED: " +  objectMapper.writeValueAsString(response));
 				reporter.addSuccess();
@@ -189,8 +187,4 @@ public class ModuloImportPartenza implements Modulo {
 	public Integer getTotalRows() {
 		return null;
     }
-
-
-
-
 }

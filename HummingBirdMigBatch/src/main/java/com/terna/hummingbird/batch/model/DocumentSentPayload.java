@@ -7,8 +7,8 @@ public class DocumentSentPayload {
     private String idLotto;
     private FileToUpload fileToUpload;
     private String version;
-    private long systemId;
-    private long docNumber;
+    private String systemId;
+    private String docNumber;
     private String docNameObject;
     private Instant creationDate;
     private String status;
@@ -22,7 +22,7 @@ public class DocumentSentPayload {
     private long authorId;
     private int numeroAllegati;
     private Instant dataProtocollo;
-    private long numeroProtocollo;
+    private String numeroProtocollo;
     private String tipoProtocollo;
     private String codiceRegistro;
     private List<AclEntry> acl;
@@ -54,19 +54,19 @@ public class DocumentSentPayload {
         this.version = version;
     }
 
-    public long getSystemId() {
+    public String getSystemId() {
         return systemId;
     }
 
-    public void setSystemId(long systemId) {
+    public void setSystemId(String systemId) {
         this.systemId = systemId;
     }
 
-    public long getDocNumber() {
+    public String getDocNumber() {
         return docNumber;
     }
 
-    public void setDocNumber(long docNumber) {
+    public void setDocNumber(String docNumber) {
         this.docNumber = docNumber;
     }
 
@@ -174,11 +174,11 @@ public class DocumentSentPayload {
         this.dataProtocollo = dataProtocollo;
     }
 
-    public long getNumeroProtocollo() {
+    public String getNumeroProtocollo() {
         return numeroProtocollo;
     }
 
-    public void setNumeroProtocollo(long numeroProtocollo) {
+    public void setNumeroProtocollo(String numeroProtocollo) {
         this.numeroProtocollo = numeroProtocollo;
     }
 
