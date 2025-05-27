@@ -148,7 +148,6 @@ public class ModuloImportPartenza implements Modulo {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
-
 	}
 
 	// postExecute

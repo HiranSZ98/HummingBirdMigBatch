@@ -9,13 +9,11 @@ public class DocumentArrivedPayload {
     private String idLotto;
     private FileToUpload fileToUpload;
     private String version;
-    private int systemId;
-    private int docNumber;
+    private String systemId;
+    private String docNumber;
     private String docNameObject;
     private Instant creationDate;
     private String status;
-
-    @JsonProperty("abstract")
     private String abstractText; // 'abstract' is a reserved word
     private String annullato;
     private String autAnnullamento;
@@ -23,10 +21,10 @@ public class DocumentArrivedPayload {
     private Instant dataAnn;
     private String docType;
     private String author;
-    private int authorId;
+    private long authorId;
     private int numeroAllegati;
     private Instant dataProtocollo;
-    private int numeroProtocollo;
+    private String numeroProtocollo;
     private String tipoProtocollo;
     private String codiceRegistro;
     private List<AclEntry> acl;
@@ -58,19 +56,19 @@ public class DocumentArrivedPayload {
         this.version = version;
     }
 
-    public int getSystemId() {
+    public String getSystemId() {
         return systemId;
     }
 
-    public void setSystemId(int systemId) {
+    public void setSystemId(String systemId) {
         this.systemId = systemId;
     }
 
-    public int getDocNumber() {
+    public String getDocNumber() {
         return docNumber;
     }
 
-    public void setDocNumber(int docNumber) {
+    public void setDocNumber(String docNumber) {
         this.docNumber = docNumber;
     }
 
@@ -98,12 +96,10 @@ public class DocumentArrivedPayload {
         this.status = status;
     }
 
-    @JsonProperty("abstract")
     public String getAbstractText() {
         return abstractText;
     }
 
-    @JsonProperty("abstract")
     public void setAbstractText(String abstractText) {
         this.abstractText = abstractText;
     }
@@ -156,11 +152,11 @@ public class DocumentArrivedPayload {
         this.author = author;
     }
 
-    public int getAuthorId() {
+    public long getAuthorId() {
         return authorId;
     }
 
-    public void setAuthorId(int authorId) {
+    public void setAuthorId(long authorId) {
         this.authorId = authorId;
     }
 
@@ -180,11 +176,11 @@ public class DocumentArrivedPayload {
         this.dataProtocollo = dataProtocollo;
     }
 
-    public int getNumeroProtocollo() {
+    public String getNumeroProtocollo() {
         return numeroProtocollo;
     }
 
-    public void setNumeroProtocollo(int numeroProtocollo) {
+    public void setNumeroProtocollo(String numeroProtocollo) {
         this.numeroProtocollo = numeroProtocollo;
     }
 

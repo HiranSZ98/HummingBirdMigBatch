@@ -20,7 +20,7 @@ import java.util.*;
 public class BatchUtil {
 
 	private static Logger log = Logger.getLogger(BatchUtil.class);
-
+	private static final Properties properties = new Properties();
 
 	public static boolean checkString(String s) {
 		if (s != null && !s.isEmpty())
@@ -59,9 +59,9 @@ public class BatchUtil {
 			reader.readNext(); // skip header
 			String[] line;
 			while ((line = reader.readNext()) != null) {
-				long systemId = Long.parseLong(line[0]);
-				long docNumber = Long.parseLong(line[1]);
-				long mittenteSystemId = Long.parseLong(line[2]);
+				long systemId = line[0].isEmpty() ? 0 : Long.parseLong(line[0]);
+				long docNumber = line[1].isEmpty() ? 0 : Long.parseLong(line[1]);
+				long mittenteSystemId = line[2].isEmpty() ? 0 : Long.parseLong(line[2]);
 				String code = line[3];
 				String desc = line[4];
 
@@ -76,7 +76,6 @@ public class BatchUtil {
 		}
 		return dmMap;
 	}
-
 
 	public static Instant convertDate(String dateStr) {
 		Instant result = null;

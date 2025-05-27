@@ -20,6 +20,7 @@ public class ModuloImportMittenti implements Modulo {
 	public String nome_lotto = "";
 	public String file_name = "";
 	private Reporter reporter;
+	private ObjectMapper objectMapper;
 	private int num_rows = 0;
 	private String csvPath = "C:\\RjcSoft\\NTTData\\Terna\\Estrazioni\\Lotti";
 
