@@ -15,6 +15,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class BatchUtil {
@@ -44,7 +45,7 @@ public class BatchUtil {
 				acl.setSystemID(systemId);
 				acl.setGroupID(aclId);
 				acl.setDescription(aclName);
-				String key = String.valueOf(docNumber);
+				String key = String.valueOf(docNumber).trim();
 				//aclMap.computeIfAbsent(key, k -> new ArrayList<>()).add(acl);
 				aclMap.computeIfAbsent(key, k -> new ArrayList<>()).add(acl);
 			}
@@ -87,7 +88,6 @@ public class BatchUtil {
 		return result;
 	}
 
-
 	public static int parseInt(String s) {
 		try { return Integer.parseInt(s); } catch (Exception e) { return 0; }
 	}
@@ -96,6 +96,15 @@ public class BatchUtil {
 		try { return Long.parseLong(s); } catch (Exception e) { return 0; }
 	}
 
+	public static Instant parseSafeInstant(String value) {
+		if (value != null && !value.isBlank()) {
+			try {
+				return Instant.parse(value.trim());
+			} catch (DateTimeParseException e) {
+			}
+		}
+		return null;
+	}
 
 	public static FileToUpload toFileToUpload(String filePath) {
 		FileToUpload fileBean = null;
@@ -141,8 +150,4 @@ public class BatchUtil {
 
 		return sb.toString();
 	}
-
-
-
-
 }

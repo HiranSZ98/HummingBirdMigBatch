@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.time.Instant;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 
@@ -34,8 +35,7 @@ public class ModuloImportArrivo implements Modulo {
 	private Reporter reporter;
 	private ObjectMapper objectMapper;
 	private int num_rows = 0;
-	//private String csvPath = "C:\\RjcSoft\\NTTData\\Terna\\Estrazioni\\Lotti";
-	private String csvPath = BatchConfig.getCsvPath();
+	private String csvPath = "C:\\RjcSoft\\NTTData\\Terna\\Estrazioni\\Lotti\\";
 	//private String csvPath = "C:\\Projects\\terma\\esatrazioni\\Lotti";
 
 	private Map<String, List<AclEntry>> aclMap = new HashMap<>();
@@ -97,7 +97,7 @@ public class ModuloImportArrivo implements Modulo {
 
 				String[] line = record.split(",", -1);
 				try {
-					long docNumber = Long.parseLong(line[5]);
+					String docNumber = String.valueOf(line[5]);
 					log.info("Processing docNumber: " + docNumber);
 
 					DocumentArrivedPayload doc = new DocumentArrivedPayload();
@@ -117,26 +117,28 @@ public class ModuloImportArrivo implements Modulo {
 					doc.setAbstractText(line[10]);
 					doc.setAnnullato(line[11]);
 					doc.setAutAnnullamento(line[12]);
-					doc.setAutAnnullamentoId(Integer.parseInt(line[13]));
-					doc.setDataAnn(Instant.parse(line[14]));
+					doc.setAutAnnullamentoId(BatchUtil.parseInt(line[13]));
+					doc.setDataAnn(BatchUtil.parseSafeInstant(line[14]));
 					doc.setDocType(line[15]);
 					doc.setAuthor(line[16]);
-					doc.setAuthorId(Long.parseLong(line[17]));
-					doc.setNumeroAllegati(Integer.parseInt(line[18]));
-					doc.setDataProtocollo(Instant.parse(line[19]));
+					doc.setAuthorId(BatchUtil.parseLong(line[17]));
+					doc.setNumeroAllegati(BatchUtil.parseInt(line[18]));
+					doc.setDataProtocollo(BatchUtil.convertDate(line[19]));
 					doc.setNumeroProtocollo(line[20]);
 					doc.setTipoProtocollo(line[21]);
 					doc.setCodiceRegistro(line[22]);
-					doc.setDataProtocolloRicevuto(Instant.parse(line[23]));
+					doc.setDataProtocolloRicevuto(BatchUtil.convertDate(line[23]));
 					doc.setNumeroProtocolloRicevuto(line[24]);
 					doc.setAcl(aclMap.getOrDefault(String.valueOf(docNumber), new ArrayList<>()));
 					doc.setMittenti(dmMap.getOrDefault(String.valueOf(docNumber), new ArrayList<>()));
 					documentPayLoads.add(doc);
 				} catch (Exception e) {
+					log.error("Elaborazione lettura non avvenuta");
 					log.error(e.getMessage(), e);
 				}
 			}
 		} catch (Exception e) {
+			log.error("Lettura File fallita");
 			log.error(e.getMessage(), e);
 		}
 	}
@@ -151,8 +153,7 @@ public class ModuloImportArrivo implements Modulo {
 				log.info("json doc: " + objectMapper.writeValueAsString(doc));
 				doc.setFileToUpload(BatchUtil.toFileToUpload(doc.getFileToUpload().getFilePath()));
 				String jsonDoc = objectMapper.writeValueAsString(doc);
-			//	String url = "https://archiviomigrationappnew-ctfmejg6c8cxgmcd.westeurope-01.azurewebsites.net/api/v1.0/ArchivioMigration/CreateDocumentArrived";
-				String url = BatchConfig.getDocumentArrivedUrl();
+				String url = "https://archiviomigrationappnew-ctfmejg6c8cxgmcd.westeurope-01.azurewebsites.net/api/v1.0/ArchivioMigration/CreateDocumentArrived";
 				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url);
 				log.info("DOC CREATED: " +  objectMapper.writeValueAsString(response));
 				reporter.addSuccess();

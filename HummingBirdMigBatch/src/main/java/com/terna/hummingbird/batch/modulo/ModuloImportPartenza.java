@@ -59,7 +59,6 @@ public class ModuloImportPartenza implements Modulo {
 		log.info(nome_lotto + " file name " + file_name);
 		dm_file_name = csvPath + "\\" + nome_lotto + "\\" + "DM_" + nome_lotto + ".csv";
 		acl_file_name = csvPath + "\\" + nome_lotto + "\\" + "ACL_" + nome_lotto + ".csv";
-
 	}
 
 	// preExecute
