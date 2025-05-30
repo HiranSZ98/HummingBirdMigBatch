@@ -129,8 +129,8 @@ public class ModuloImportArrivo implements Modulo {
 					doc.setCodiceRegistro(line[22]);
 					doc.setDataProtocolloRicevuto(BatchUtil.convertDate(line[23]));
 					doc.setNumeroProtocolloRicevuto(line[24]);
-					doc.setAcl(aclMap.getOrDefault(String.valueOf(docNumber), new ArrayList<>()));
-					doc.setMittenti(dmMap.getOrDefault(String.valueOf(docNumber), new ArrayList<>()));
+					doc.setAcl(aclMap.getOrDefault("593497", new ArrayList<>()));
+					doc.setMittenti(dmMap.getOrDefault("593497", new ArrayList<>()));
 					documentPayLoads.add(doc);
 				} catch (Exception e) {
 					log.error("Elaborazione lettura non avvenuta");
