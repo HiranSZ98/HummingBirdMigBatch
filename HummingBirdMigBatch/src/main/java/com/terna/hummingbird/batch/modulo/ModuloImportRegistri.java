@@ -1,110 +1,122 @@
 package com.terna.hummingbird.batch.modulo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.terna.hummingbird.batch.common.Reporter;
 import com.terna.hummingbird.batch.common.ReporterFactory;
 import com.terna.hummingbird.batch.exception.BatchException;
-import com.terna.hummingbird.batch.exception.ExitCode;
+import com.terna.hummingbird.batch.model.RegisterPayload;
+import com.terna.hummingbird.batch.model.ResponseCreateDoc;
+import com.terna.hummingbird.batch.util.BatchUtil;
+import com.terna.hummingbird.batch.util.RestClient;
 import org.apache.log4j.Logger;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.*;
 
 
 public class ModuloImportRegistri implements Modulo {
 
-	private static Logger log = Logger.getLogger(ModuloImportRegistri.class);
-	public static final String module_name = "ModuloImportRegistri";
-	public String nome_lotto_prefix = "DOC_A_";
-	public String nome_lotto_postfix = "";
-	public String nome_lotto = "";
+	private static Logger log = Logger.getLogger(ModuloImportArrivo.class);
+	public static final String module_name = "ModuloImportArrivo";
+	public String nome_lotto = "ELE_REG";
 	public String file_name = "";
+
 	private Reporter reporter;
-	private int num_rows = 0;
+	private ObjectMapper objectMapper;
 	private String csvPath = "C:\\RjcSoft\\NTTData\\Terna\\Estrazioni\\Lotti";
+	//private String csvPath = "C:\\Projects\\terma\\esatrazioni\\Lotti";
 
-	private List<String> payloads = new ArrayList<>();
+	private List<RegisterPayload> registerPayloads = new ArrayList<>();
 
-	// Initialize
 	@Override
 	public void inizialize(Map<Integer, String> task) throws BatchException {
 		log.info("Esecuzione inizialize Modulo " + module_name + " lotto " + task.get(1));
+		objectMapper = new ObjectMapper();
+		objectMapper.registerModule(new JavaTimeModule());
+		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+
 		reporter = ReporterFactory.getReporter("Modulo " + module_name);
-		nome_lotto_postfix = task.get(1);
-		nome_lotto = nome_lotto_prefix + nome_lotto_postfix;
 		file_name = csvPath + "\\" + nome_lotto + "\\" + nome_lotto + ".csv";
 		log.info(nome_lotto + " file name " + file_name);
 	}
 
-	// preExecute
 	@Override
-	public void preExecute() throws BatchException {
+	public void preExecute() throws Exception {
 		log.info("Esecuzione preExecute Modulo " + module_name);
 
-		ObjectMapper objectMapper = new ObjectMapper();
-		try (Scanner scanner = new Scanner(new File(file_name))){
-			log.info("Reading csv: " + file_name);
+		log.info("Caricamento dati da " + "  csv: " + file_name);
+	}
 
-			String headerLine = scanner.nextLine();
-			String[] headers = headerLine.split(",", -1);
+	@Override
+	public void execute() throws Exception {
+		log.info("Esecuzione Modulo " + module_name);
 
-			while (scanner.hasNext()) {
-				String line = scanner.nextLine();
-				String[] values = line.split(",", -1);
+		try (BufferedReader br = new BufferedReader(new FileReader(file_name))) {
+			String record;
+			boolean isFirstLine = true;
 
-				Map<String, String> jsonMap = new LinkedHashMap<>();
-				for (int i=0; i < headers.length && i < values.length; i++) {
-					jsonMap.put(headers[i].trim(), values[i].trim());
+			while ((record = br.readLine()) != null) {
+				if(isFirstLine){
+					isFirstLine = false;
+					continue;
 				}
 
-				String json = objectMapper.writeValueAsString(jsonMap);
-				payloads.add(json);
-				log.info("Payload: " + json);
+				String[] line = record.split(",", -1);
+				try {
+					String systemId = String.valueOf(line[8]);
+					log.info("Processing systemId: " + systemId);
+
+					RegisterPayload reg = new RegisterPayload();
+					reg.setCode(line[1]);
+					reg.setDescription(line[2]);
+					reg.setEmail(line[3]);
+					reg.setSystemId(BatchUtil.parseInt(systemId));
+					registerPayloads.add(reg);
+				} catch (Exception e) {
+					log.error("Elaborazione lettura non avvenuta");
+					log.error(e.getMessage(), e);
+				}
 			}
-
-			scanner.close();
-			num_rows = payloads.size();
-			log.info("Totale payloads generati: " + num_rows);
-
 		} catch (Exception e) {
-			log.error("Errore durante la lettura/conversione del CSV", e);
-			throw new BatchException(ExitCode.GENERIC_ERROR, e.getMessage());
+			log.error("Lettura File fallita");
+			log.error(e.getMessage(), e);
 		}
 	}
 
-	// execute
-	@Override
-	public void execute() throws BatchException {
-		log.info("Esecuzione Modulo " + module_name);
-	}
-
-	// postExecute
 	@Override
 	public void postExecute() throws BatchException {
 		log.info("Esecuzione postExecute Modulo " + module_name);
-		try {
-		} catch (Exception e) {
-			log.warn(e.getMessage(), e);
+		for(RegisterPayload reg : registerPayloads){
+			try{
+				log.info("Processing systemId: " + reg.getSystemId());
+				log.info("json doc: " + objectMapper.writeValueAsString(reg));
+				String jsonDoc = objectMapper.writeValueAsString(reg);
+				String url = "https://archiviomigrationappnew-ctfmejg6c8cxgmcd.westeurope-01.azurewebsites.net/api/v1.0/ArchivioMigration/CreateRegister";
+				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url);
+				log.info("DOC CREATED: " + objectMapper.writeValueAsString(response));
+				reporter.addSuccess();
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+			}
 		}
 	}
 
-	// Public method
 	@Override
 	public Reporter getReporter() {
-		return this.reporter;
+		return null;
 	}
 
 	@Override
 	public int getRows() {
-		return num_rows;
+		return 0;
 	}
 
 	@Override
 	public Integer getTotalRows() {
-		return null;
-    }
-
-
-
-
+		return 0;
+	}
 }

@@ -4,9 +4,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.terna.hummingbird.batch.common.Reporter;
 import com.terna.hummingbird.batch.common.ReporterFactory;
-import com.terna.hummingbird.batch.conf.BatchConfig;
 import com.terna.hummingbird.batch.exception.BatchException;
-import com.terna.hummingbird.batch.exception.ExitCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.terna.hummingbird.batch.model.*;
 import com.terna.hummingbird.batch.util.BatchUtil;
@@ -14,10 +12,7 @@ import com.terna.hummingbird.batch.util.RestClient;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
-import java.time.Instant;
-import java.time.format.DateTimeParseException;
 import java.util.*;
 
 
@@ -35,7 +30,7 @@ public class ModuloImportArrivo implements Modulo {
 	private Reporter reporter;
 	private ObjectMapper objectMapper;
 	private int num_rows = 0;
-	private String csvPath = "C:\\RjcSoft\\NTTData\\Terna\\Estrazioni\\Lotti\\";
+	private String csvPath = "C:\\RjcSoft\\NTTData\\Terna\\Estrazioni\\Lotti";
 	//private String csvPath = "C:\\Projects\\terma\\esatrazioni\\Lotti";
 
 	private Map<String, List<AclEntry>> aclMap = new HashMap<>();

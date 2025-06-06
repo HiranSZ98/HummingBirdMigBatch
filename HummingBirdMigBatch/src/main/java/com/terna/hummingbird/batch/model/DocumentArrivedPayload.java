@@ -1,7 +1,5 @@
 package com.terna.hummingbird.batch.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.time.Instant;
 import java.util.List;
 
