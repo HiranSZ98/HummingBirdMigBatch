@@ -99,7 +99,7 @@ public class ModuloImportPeople implements Modulo {
 				log.info("Processing systemId: " + per.getSystemId());
 				log.info("json doc: " + objectMapper.writeValueAsString(per));
 				String jsonDoc = objectMapper.writeValueAsString(per);
-				String url = "https://archiviomigrationappnew-ctfmejg6c8cxgmcd.westeurope-01.azurewebsites.net/api/v1.0/ArchivioMigration/CreateRegister";
+				String url = "https://archiviofe-a8cabjb7ggf8afbb.westeurope-01.azurewebsites.net/ArchivioMigration/api/v1/Person";
 				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url);
 				log.info("DOC CREATED: " + objectMapper.writeValueAsString(response));
 				reporter.addSuccess();

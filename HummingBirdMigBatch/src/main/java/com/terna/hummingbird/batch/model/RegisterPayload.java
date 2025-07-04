@@ -1,10 +1,13 @@
 package com.terna.hummingbird.batch.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class RegisterPayload {
 
     public String code;
     public String description;
     public String email;
+    @JsonProperty("system_ID")
     public int systemId;
 
     public String getCode() {

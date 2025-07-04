@@ -1,13 +1,19 @@
 package com.terna.hummingbird.batch.modulo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.terna.hummingbird.batch.common.Reporter;
 import com.terna.hummingbird.batch.common.ReporterFactory;
 import com.terna.hummingbird.batch.exception.BatchException;
-import com.terna.hummingbird.batch.exception.ExitCode;
+import com.terna.hummingbird.batch.model.AclEntry;
+import com.terna.hummingbird.batch.model.ResponseCreateDoc;
+import com.terna.hummingbird.batch.util.BatchUtil;
+import com.terna.hummingbird.batch.util.RestClient;
 import org.apache.log4j.Logger;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.*;
 
 
@@ -15,23 +21,25 @@ public class ModuloImportAcl implements Modulo {
 
 	private static Logger log = Logger.getLogger(ModuloImportAcl.class);
 	public static final String module_name = "ModuloImportAcl";
-	public String nome_lotto_prefix = "DOC_A_";
-	public String nome_lotto_postfix = "";
-	public String nome_lotto = "";
+	public String nome_lotto = "ELE_ACL";
 	public String file_name = "";
+
 	private Reporter reporter;
-	private int num_rows = 0;
+	private ObjectMapper objectMapper;
 	private String csvPath = "C:\\RjcSoft\\NTTData\\Terna\\Estrazioni\\Lotti";
 
-	private List<String> payloads = new ArrayList<>();
+	private List<AclEntry> aclPayloads = new ArrayList<>();
 
 	// Initialize
 	@Override
 	public void inizialize(Map<Integer, String> task) throws BatchException {
 		log.info("Esecuzione inizialize Modulo " + module_name + " lotto " + task.get(1));
+		objectMapper = new ObjectMapper();
+		objectMapper.registerModule(new JavaTimeModule());
+		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+
 		reporter = ReporterFactory.getReporter("Modulo " + module_name);
-		nome_lotto_postfix = task.get(1);
-		nome_lotto = nome_lotto_prefix + nome_lotto_postfix;
 		file_name = csvPath + "\\" + nome_lotto + "\\" + nome_lotto + ".csv";
 		log.info(nome_lotto + " file name " + file_name);
 	}
@@ -41,35 +49,7 @@ public class ModuloImportAcl implements Modulo {
 	public void preExecute() throws BatchException {
 		log.info("Esecuzione preExecute Modulo " + module_name);
 
-		ObjectMapper objectMapper = new ObjectMapper();
-		try (Scanner scanner = new Scanner(new File(file_name))){
-			log.info("Reading csv: " + file_name);
-
-			String headerLine = scanner.nextLine();
-			String[] headers = headerLine.split(",", -1);
-
-			while (scanner.hasNext()) {
-				String line = scanner.nextLine();
-				String[] values = line.split(",", -1);
-
-				Map<String, String> jsonMap = new LinkedHashMap<>();
-				for (int i=0; i < headers.length && i < values.length; i++) {
-					jsonMap.put(headers[i].trim(), values[i].trim());
-				}
-
-				String json = objectMapper.writeValueAsString(jsonMap);
-				payloads.add(json);
-				log.info("Payload: " + json);
-			}
-
-			scanner.close();
-			num_rows = payloads.size();
-			log.info("Totale payloads generati: " + num_rows);
-
-		} catch (Exception e) {
-			log.error("Errore durante la lettura/conversione del CSV", e);
-			throw new BatchException(ExitCode.GENERIC_ERROR, e.getMessage());
-		}
+		log.info("Caricamento dati da " + " csv: " + file_name);
 	}
 
 	// execute
@@ -77,15 +57,53 @@ public class ModuloImportAcl implements Modulo {
 	public void execute() throws BatchException {
 		log.info("Esecuzione Modulo " + module_name);
 
+		try (BufferedReader br = new BufferedReader(new FileReader(file_name))) {
+			String record;
+			boolean isFirstLine = true;
+
+			while ((record = br.readLine()) != null) {
+				if(isFirstLine){
+					isFirstLine = false;
+					continue;
+				}
+
+				String[] line = record.split(",", -1);
+				try {
+					String systemId = String.valueOf(line[0]);
+					log.info("Processing systemId: " + systemId);
+
+					AclEntry acl = new AclEntry();
+					acl.setSystemID(BatchUtil.parseLong(line[0]));
+					acl.setGroupID(BatchUtil.parseLong(line[2]));
+					acl.setDescription(line[3]);
+					aclPayloads.add(acl);
+				} catch (Exception e) {
+					log.error("Elaborazione lettura non avvenuta");
+					log.error(e.getMessage(), e);
+				}
+			}
+		} catch (Exception e) {
+			log.error("Lettura File fallita");
+			log.error(e.getMessage(), e);
+		}
 	}
 
 	// postExecute
 	@Override
 	public void postExecute() throws BatchException {
 		log.info("Esecuzione postExecute Modulo " + module_name);
-		try {
-		} catch (Exception e) {
-			log.warn(e.getMessage(), e);
+		for(AclEntry acl : aclPayloads) {
+			try {
+				log.info("Processing systemId: " + acl.getSystemID());
+				log.info("json doc: " + objectMapper.writeValueAsString(acl));
+				String jsonDoc = objectMapper.writeValueAsString(acl);
+				String url = "https://archiviofe-a8cabjb7ggf8afbb.westeurope-01.azurewebsites.net/ArchivioMigration/api/v1/CreateACL";
+				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url);
+				log.info("DOC CREATED: " + objectMapper.writeValueAsString(response));
+				reporter.addSuccess();
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+			}
 		}
 	}
 
@@ -97,12 +115,12 @@ public class ModuloImportAcl implements Modulo {
 
 	@Override
 	public int getRows() {
-		return num_rows;
+		return 0;
 	}
 
 	@Override
 	public Integer getTotalRows() {
-		return null;
+		return 0;
     }
 
 

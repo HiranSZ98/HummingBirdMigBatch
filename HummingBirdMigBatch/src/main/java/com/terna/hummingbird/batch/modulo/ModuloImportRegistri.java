@@ -95,7 +95,7 @@ public class ModuloImportRegistri implements Modulo {
 				log.info("Processing systemId: " + reg.getSystemId());
 				log.info("json doc: " + objectMapper.writeValueAsString(reg));
 				String jsonDoc = objectMapper.writeValueAsString(reg);
-				String url = "https://archiviomigrationappnew-ctfmejg6c8cxgmcd.westeurope-01.azurewebsites.net/api/v1.0/ArchivioMigration/CreateRegister";
+				String url = "https://archiviofe-a8cabjb7ggf8afbb.westeurope-01.azurewebsites.net/ArchivioMigration/api/v1/Register";
 				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url);
 				log.info("DOC CREATED: " + objectMapper.writeValueAsString(response));
 				reporter.addSuccess();

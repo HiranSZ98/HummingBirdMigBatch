@@ -108,6 +108,7 @@ public class ModuloImportPartenza implements Modulo {
 					String filePath = line[0] + line[1] + line[2];
 					FileToUpload fileBean = new FileToUpload();
 					fileBean.setFilePath(filePath);
+					fileBean.setContentBase64(filePath);
 					doc.setFileToUpload(fileBean);
 
 					doc.setVersion(line[3]);
