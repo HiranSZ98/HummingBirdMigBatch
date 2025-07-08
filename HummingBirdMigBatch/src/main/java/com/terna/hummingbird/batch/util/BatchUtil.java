@@ -46,7 +46,6 @@ public class BatchUtil {
 				acl.setGroupID(aclId);
 				acl.setDescription(aclName);
 				String key = String.valueOf(docNumber).trim();
-				//aclMap.computeIfAbsent(key, k -> new ArrayList<>()).add(acl);
 				aclMap.computeIfAbsent(key, k -> new ArrayList<>()).add(acl);
 			}
 		}

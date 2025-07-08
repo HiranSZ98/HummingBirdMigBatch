@@ -8,6 +8,7 @@ import com.terna.hummingbird.batch.exception.BatchException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.terna.hummingbird.batch.model.*;
 import com.terna.hummingbird.batch.util.BatchUtil;
+import com.terna.hummingbird.batch.util.PropertyLoader;
 import com.terna.hummingbird.batch.util.RestClient;
 import org.apache.log4j.Logger;
 
@@ -30,7 +31,7 @@ public class ModuloImportArrivo implements Modulo {
 	private Reporter reporter;
 	private ObjectMapper objectMapper;
 	private int num_rows = 0;
-	private String csvPath = "C:\\RjcSoft\\NTTData\\Terna\\Estrazioni\\Lotti";
+	private String csvPath = PropertyLoader.get("csv.path");
 	//private String csvPath = "C:\\Projects\\terma\\esatrazioni\\Lotti";
 
 	private Map<String, List<AclEntry>> aclMap = new HashMap<>();
@@ -148,7 +149,7 @@ public class ModuloImportArrivo implements Modulo {
 				log.info("json doc: " + objectMapper.writeValueAsString(doc));
 				doc.setFileToUpload(BatchUtil.toFileToUpload(doc.getFileToUpload().getFilePath()));
 				String jsonDoc = objectMapper.writeValueAsString(doc);
-				String url = "https://archiviofe-a8cabjb7ggf8afbb.westeurope-01.azurewebsites.net/ArchivioMigration/api/v1/CreateDocumentArrived";
+				String url = PropertyLoader.get("document.arrived.url");
 				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url);
 				log.info("DOC CREATED: " +  objectMapper.writeValueAsString(response));
 				reporter.addSuccess();
