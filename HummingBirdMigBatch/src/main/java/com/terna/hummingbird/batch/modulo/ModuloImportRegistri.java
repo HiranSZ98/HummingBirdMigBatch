@@ -9,6 +9,8 @@ import com.terna.hummingbird.batch.exception.BatchException;
 import com.terna.hummingbird.batch.model.RegisterPayload;
 import com.terna.hummingbird.batch.model.ResponseCreateDoc;
 import com.terna.hummingbird.batch.util.BatchUtil;
+import com.terna.hummingbird.batch.util.PayloadLoggerUtil;
+import com.terna.hummingbird.batch.util.PropertyLoader;
 import com.terna.hummingbird.batch.util.RestClient;
 import org.apache.log4j.Logger;
 
@@ -26,7 +28,7 @@ public class ModuloImportRegistri implements Modulo {
 
 	private Reporter reporter;
 	private ObjectMapper objectMapper;
-	private String csvPath = "C:\\RjcSoft\\NTTData\\Terna\\Estrazioni\\Lotti";
+	private String csvPath = PropertyLoader.get("csv.path");
 	//private String csvPath = "C:\\Projects\\terma\\esatrazioni\\Lotti";
 
 	private List<RegisterPayload> registerPayloads = new ArrayList<>();
@@ -95,12 +97,14 @@ public class ModuloImportRegistri implements Modulo {
 				log.info("Processing systemId: " + reg.getSystemId());
 				log.info("json doc: " + objectMapper.writeValueAsString(reg));
 				String jsonDoc = objectMapper.writeValueAsString(reg);
-				String url = "https://archiviofe-a8cabjb7ggf8afbb.westeurope-01.azurewebsites.net/ArchivioMigration/api/v1/Register";
+				String url = PropertyLoader.get("register.url");
 				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url);
 				log.info("DOC CREATED: " + objectMapper.writeValueAsString(response));
 				reporter.addSuccess();
+				PayloadLoggerUtil.logPayload(reg, module_name, true, null);
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
+				PayloadLoggerUtil.logPayload(reg, module_name, false, e.getMessage());
 			}
 		}
 	}

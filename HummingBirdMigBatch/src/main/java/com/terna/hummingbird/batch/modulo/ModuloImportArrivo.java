@@ -8,6 +8,7 @@ import com.terna.hummingbird.batch.exception.BatchException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.terna.hummingbird.batch.model.*;
 import com.terna.hummingbird.batch.util.BatchUtil;
+import com.terna.hummingbird.batch.util.PayloadLoggerUtil;
 import com.terna.hummingbird.batch.util.PropertyLoader;
 import com.terna.hummingbird.batch.util.RestClient;
 import org.apache.log4j.Logger;
@@ -153,8 +154,10 @@ public class ModuloImportArrivo implements Modulo {
 				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url);
 				log.info("DOC CREATED: " +  objectMapper.writeValueAsString(response));
 				reporter.addSuccess();
+				PayloadLoggerUtil.logPayload(doc, module_name, true, null);
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
+				PayloadLoggerUtil.logPayload(doc, module_name, false, e.getMessage());
 			}
 		}
 	}

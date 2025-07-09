@@ -8,6 +8,8 @@ import com.terna.hummingbird.batch.exception.ExitCode;
 import com.terna.hummingbird.batch.model.DestMitt;
 import com.terna.hummingbird.batch.model.ResponseCreateDoc;
 import com.terna.hummingbird.batch.util.BatchUtil;
+import com.terna.hummingbird.batch.util.PayloadLoggerUtil;
+import com.terna.hummingbird.batch.util.PropertyLoader;
 import com.terna.hummingbird.batch.util.RestClient;
 import org.apache.log4j.Logger;
 
@@ -26,7 +28,7 @@ public class ModuloImportDesMittPartenza implements Modulo {
 
 	private Reporter reporter;
 	private ObjectMapper objectMapper = new ObjectMapper();
-	private String csvPath = "C:\\RjcSoft\\NTTData\\Terna\\Estrazioni\\Lotti";
+	private String csvPath = PropertyLoader.get("csv.path");
 
 	private List<DestMitt> payloads = new ArrayList<>();
 
@@ -111,12 +113,14 @@ public class ModuloImportDesMittPartenza implements Modulo {
 				log.info("Processing systemId: " + des.getSystemID());
 				log.info("json doc: " + objectMapper.writeValueAsString(des));
 				String jsonDoc = objectMapper.writeValueAsString(des);
-				String url = "https://archiviofe-a8cabjb7ggf8afbb.westeurope-01.azurewebsites.net/ArchivioMigration/api/v1/CreateMittDest";
+				String url = PropertyLoader.get("mittdes.url");
 				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url);
 				log.info("DOC CREATED: " + objectMapper.writeValueAsString(response));
 				reporter.addSuccess();
+				PayloadLoggerUtil.logPayload(des, module_name, true, null);
 			} catch (Exception e) {
 				log.warn(e.getMessage(), e);
+				PayloadLoggerUtil.logPayload(des, module_name, false, e.getMessage());
 			}
 		}
 	}
