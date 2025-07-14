@@ -101,10 +101,7 @@ public class ModuloImportArrivo implements Modulo {
 					doc.setIdLotto(nome_lotto);
 
 					String filePath = line[0] + line[1] + line[2];
-					FileToUpload fileBean = new FileToUpload();
-					fileBean.setFilePath(filePath);
-					doc.setFileToUpload(fileBean);
-
+					doc.setFileToUpload(BatchUtil.toFileToUpload(filePath));
 					doc.setVersion(line[3]);
 					doc.setSystemId(line[4]);
 					doc.setDocNumber(line[5]);
@@ -148,7 +145,6 @@ public class ModuloImportArrivo implements Modulo {
 			try {
 				log.info("Processing docNumber: " + doc.getDocNumber());
 				log.info("json doc: " + objectMapper.writeValueAsString(doc));
-				doc.setFileToUpload(BatchUtil.toFileToUpload(doc.getFileToUpload().getFilePath()));
 				String jsonDoc = objectMapper.writeValueAsString(doc);
 				String url = PropertyLoader.get("document.arrived.url");
 				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url);

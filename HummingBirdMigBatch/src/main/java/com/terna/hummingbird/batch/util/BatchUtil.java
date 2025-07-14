@@ -3,7 +3,6 @@ package com.terna.hummingbird.batch.util;
 import com.opencsv.CSVReader;
 import com.terna.hummingbird.batch.model.AclEntry;
 import com.terna.hummingbird.batch.model.DestMitt;
-import com.terna.hummingbird.batch.model.DocumentSentPayload;
 import com.terna.hummingbird.batch.model.FileToUpload;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
