@@ -5,23 +5,26 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class BatchConfig {
+
     private static final Properties properties = new Properties();
-    private static final String CONFIG_FILE = "C:\\RjcSoft\\NTTData\\Terna\\HummingBirdMigBatch\\HummingBirdMigBatch\\config\\HBMBCredentialsDoc.properties";
+    private static final String CONFIG_FILE = "HummingBirdMigBatch.properties"; // just the filename
 
     static {
         try (InputStream input = BatchConfig.class.getClassLoader().getResourceAsStream(CONFIG_FILE)) {
 
             if (input == null) {
-                throw new RuntimeException("Unable to find " + CONFIG_FILE);
+                throw new RuntimeException("Unable to find configuration file in classpath: " + CONFIG_FILE);
             }
+
             properties.load(input);
-        }catch (IOException e) {
-            throw new RuntimeException("Error loading configuration", e);
+
+        } catch (IOException e) {
+            throw new RuntimeException("Error loading configuration file: " + CONFIG_FILE, e);
         }
     }
 
-    public static String getCsvPath() {
-        return properties.getProperty("csv.path");
+    public static String getCsvRootPath() {
+        return properties.getProperty("csv.root.path");
     }
 
     public static String getDocumentArrivedUrl() {

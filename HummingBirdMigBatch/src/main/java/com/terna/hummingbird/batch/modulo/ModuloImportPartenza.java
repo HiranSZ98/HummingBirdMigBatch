@@ -5,18 +5,18 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.terna.hummingbird.batch.common.Reporter;
 import com.terna.hummingbird.batch.common.ReporterFactory;
+import com.terna.hummingbird.batch.conf.BatchConfig;
 import com.terna.hummingbird.batch.exception.BatchException;
 import com.terna.hummingbird.batch.model.*;
-import com.terna.hummingbird.batch.util.BatchUtil;
-import com.terna.hummingbird.batch.util.PayloadLoggerUtil;
-import com.terna.hummingbird.batch.util.PropertyLoader;
-import com.terna.hummingbird.batch.util.RestClient;
+import com.terna.hummingbird.batch.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,13 +34,15 @@ public class ModuloImportPartenza implements Modulo {
 	public String file_name = "";
 	public String dm_file_name = "";
 	public String acl_file_name = "";
-
+	public String url_sent = "";
+	public String path_file_ok;
+	public String path_file_ko;
 	private Reporter reporter;
 	private ObjectMapper objectMapper;
 	private int num_rows = 0;
-	private String csvPath = PropertyLoader.get("csv.path");
-	//private String csvPath = "C:\\Projects\\terma\\estrazioni\\Lotti";
+	private String csvRootPath = BatchConfig.getCsvRootPath();
 
+	private Map<String, String> okMap = new HashMap<String, String>();
 	private Map<String, List<AclEntry>> aclMap = new HashMap<String, List<AclEntry>>();
 	private Map<String, List<DestMitt>> dmMap = new HashMap<String, List<DestMitt>>();
 	private List<DocumentSentPayload> documents = new ArrayList<>();
@@ -54,13 +56,16 @@ public class ModuloImportPartenza implements Modulo {
 		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
+		url_sent = BatchConfig.getDocumentSentUrl();
 		reporter = ReporterFactory.getReporter("Modulo " + module_name);
 		nome_lotto_postfix = task.get(1);
 		nome_lotto = nome_lotto_prefix + nome_lotto_postfix;
-		file_name = csvPath + "\\" + nome_lotto + "\\" + nome_lotto + ".csv";
+		file_name = csvRootPath + "\\" + nome_lotto + "\\" + nome_lotto + ".csv";
 		log.info(nome_lotto + " file name " + file_name);
-		dm_file_name = csvPath + "\\" + nome_lotto + "\\" + "DM_" + nome_lotto + ".csv";
-		acl_file_name = csvPath + "\\" + nome_lotto + "\\" + "ACL_" + nome_lotto + ".csv";
+		path_file_ok = csvRootPath + "\\" + nome_lotto + "\\" + nome_lotto + ".ok";
+		path_file_ko = csvRootPath + "\\" + nome_lotto + "\\" + nome_lotto + ".ko";
+		dm_file_name = csvRootPath + "\\" + nome_lotto + "\\" + "DM_" + nome_lotto + ".csv";
+		acl_file_name = csvRootPath + "\\" + nome_lotto + "\\" + "ACL_" + nome_lotto + ".csv";
 	}
 
 	// preExecute
@@ -73,6 +78,9 @@ public class ModuloImportPartenza implements Modulo {
 				"\n dm: " + dm_file_name +  ", " +
 				"\n acl: " + acl_file_name);
 		try {
+
+			Files.deleteIfExists(Paths.get(path_file_ko));
+			okMap = FileUtils.loadFileToMap(path_file_ok);
 			aclMap = BatchUtil.loadACL(acl_file_name);
 			log.info("Caricamento dati da " +  " acl: " + dm_file_name + " effettuato con successo.");
 			dmMap = BatchUtil.loadDM(dm_file_name);
@@ -100,8 +108,11 @@ public class ModuloImportPartenza implements Modulo {
 				// Split line into fields
 				String[] line = record.split(",", -1); // -1 to keep empty strings
 				try {
-					String systemId = line[4];
 					String docNumber = line[5];
+					if (okMap.containsKey(docNumber)) {
+						continue; //skip already processed.
+					}
+					String systemId = line[4];
 					log.info("Processing docNumber: " + docNumber);
 
 					DocumentSentPayload doc = new DocumentSentPayload();
@@ -121,7 +132,7 @@ public class ModuloImportPartenza implements Modulo {
 					doc.setAnnullato(line[11]);
 					doc.setAutAnnullamento(line[12]);
 					//doc.setAutAnnullamentoId(parseLong(line[13]));
-					//doc.setDataAnn(convertDate(line[14]));//TODO
+					//doc.setDataAnn(convertDate(line[14]));
 					doc.setDocType(line[15]);
 					doc.setAuthor(line[16]);
 					doc.setAuthorId(BatchUtil.parseLong(line[17]));
@@ -138,9 +149,10 @@ public class ModuloImportPartenza implements Modulo {
 
 					doc.setAcl(aclMap.getOrDefault(String.valueOf(docNumber), new ArrayList<>()));
 					doc.setDestinatari(dmMap.getOrDefault(String.valueOf(docNumber), new ArrayList<>()));
+
 					documents.add(doc);
+
 				} catch (Exception e) {
-					//TODO aggiungere riga errore (recovery)
 					log.error(e.getMessage(), e);
 				}
 			}
@@ -158,15 +170,13 @@ public class ModuloImportPartenza implements Modulo {
 				log.info("Processing docNumber: " + doc.getDocNumber());
 				log.info("json doc: " +  objectMapper.writeValueAsString(doc));
 				String jsonDoc = objectMapper.writeValueAsString(doc);
-				String url = PropertyLoader.get("document.sent.url");
-				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url);
+				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url_sent);
 				log.info("DOC CREATED: " +  objectMapper.writeValueAsString(response));
 				reporter.addSuccess();
-				PayloadLoggerUtil.logPayload(doc, module_name, true, null);
+				FileUtils.appendLine(path_file_ok, doc.getDocNumber());
 			} catch (Exception e) {
-				//TODO aggiungere riga errore (recovry)
+				FileUtils.appendLine(path_file_ko, doc.getDocNumber());
 				log.error(e.getMessage(), e);
-				PayloadLoggerUtil.logPayload(doc, module_name, false, e.getMessage());
 			}
 		}
 	}
