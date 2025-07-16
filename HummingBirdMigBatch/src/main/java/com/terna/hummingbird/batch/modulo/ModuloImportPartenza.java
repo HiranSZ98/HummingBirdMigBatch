@@ -73,6 +73,8 @@ public class ModuloImportPartenza implements Modulo {
 	public void preExecute() throws Exception {
 		log.info("Esecuzione preExecute Modulo " + module_name);
 
+		FileUtils.prepareLogFiles(path_file_ok, path_file_ko);
+
 		log.info("Caricamento dati da " +
 				"\n csv: " + file_name + " +, " +
 				"\n dm: " + dm_file_name +  ", " +
@@ -166,6 +168,7 @@ public class ModuloImportPartenza implements Modulo {
 	public void postExecute() throws BatchException {
 		log.info("Esecuzione postExecute Modulo " + module_name);
 		for (DocumentSentPayload doc:documents) {
+
 			try {
 				log.info("Processing docNumber: " + doc.getDocNumber());
 				log.info("json doc: " +  objectMapper.writeValueAsString(doc));
@@ -173,9 +176,9 @@ public class ModuloImportPartenza implements Modulo {
 				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url_sent);
 				log.info("DOC CREATED: " +  objectMapper.writeValueAsString(response));
 				reporter.addSuccess();
-				FileUtils.appendLine(path_file_ok, doc.getDocNumber());
+				FileUtils.appendOk(path_file_ok, doc.getDocNumber());
 			} catch (Exception e) {
-				FileUtils.appendLine(path_file_ko, doc.getDocNumber());
+				FileUtils.appendKo(path_file_ko, doc.getDocNumber());
 				log.error(e.getMessage(), e);
 			}
 		}
