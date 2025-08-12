@@ -40,7 +40,7 @@ public class ModuloFactory {
 			case Constants.BATCH_IMPORT_PARTENZA:
 				return new ModuloImportPartenza();
 			case Constants.BATCH_IMPORT_DESMITTPARTENZA:
-				return new ModuloImportDesMittPartenza();
+				return new ModuloImportMittDest();
 			case Constants.BATCH_IMPORT_ACL:
 				return new ModuloImportAcl();
 			default:

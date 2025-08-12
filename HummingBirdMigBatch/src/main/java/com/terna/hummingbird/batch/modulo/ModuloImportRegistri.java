@@ -84,8 +84,9 @@ public class ModuloImportRegistri implements Modulo {
 				}
 
 				String[] line = record.split(",", -1);
+				String systemId = "";
 				try {
-					String systemId = String.valueOf(line[8]);
+					systemId = String.valueOf(line[8]);
 					log.info("Processing systemId: " + systemId);
 
 					if (okMap.containsKey(systemId)) {
@@ -98,12 +99,11 @@ public class ModuloImportRegistri implements Modulo {
 					reg.setSystemId(BatchUtil.parseInt(systemId));
 					registerPayloads.add(reg);
 				} catch (Exception e) {
-					log.error("Elaborazione lettura non avvenuta");
+					FileUtils.appendKo(path_file_ko, systemId + ";" + record);
 					log.error(e.getMessage(), e);
 				}
 			}
 		} catch (Exception e) {
-			log.error("Lettura File fallita");
 			log.error(e.getMessage(), e);
 		}
 	}

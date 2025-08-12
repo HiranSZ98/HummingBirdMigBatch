@@ -21,9 +21,9 @@ import java.nio.file.Paths;
 import java.util.*;
 
 
-public class ModuloImportDesMittPartenza implements Modulo {
+public class ModuloImportMittDest implements Modulo {
 
-	private static Logger log = Logger.getLogger(ModuloImportDesMittPartenza.class);
+	private static Logger log = Logger.getLogger(ModuloImportMittDest.class);
 	public static final String module_name = "ModuloImportDesMittPartenza";
 	public String nome_lotto = "ELE_DEST_MITT";
 	public String file_name = "";
@@ -90,8 +90,9 @@ public class ModuloImportDesMittPartenza implements Modulo {
 				}
 
 				String[] line = record.split(",", -1);
+				String systemId = "";
 				try {
-					String systemId = String.valueOf(line[15]);
+					systemId = String.valueOf(line[15]);
 					log.info("Processing systemId: " + systemId);
 
 					if (okMap.containsKey(systemId)) {
@@ -119,12 +120,11 @@ public class ModuloImportDesMittPartenza implements Modulo {
 					des.setTipo(line[17]);
 					payloads.add(des);
 				} catch (Exception e) {
-					log.error("Elaborazione lettura non avvenuta");
+					FileUtils.appendKo(path_file_ko, systemId + ";" + record);
 					log.error(e.getMessage(), e);
 				}
 			}
 		} catch (Exception e) {
-			log.error("Lettura File fallita");
 			log.error(e.getMessage(), e);
 		}
 

@@ -86,8 +86,9 @@ public class ModuloImportPeople implements Modulo {
 				}
 
 				String[] line = record.split(",", -1);
+				String systemId = "";
 				try {
-					String systemId = String.valueOf(line[0]);
+					systemId = String.valueOf(line[0]);
 					log.info("Processing systemId: " + systemId);
 
 					if (okMap.containsKey(systemId)) {
@@ -100,6 +101,7 @@ public class ModuloImportPeople implements Modulo {
 					per.setEmail(line[5]);
 					personPayloads.add(per);
 				} catch (Exception e) {
+					FileUtils.appendKo(path_file_ko, systemId + ";" + record);
 					log.error(e.getMessage(), e);
 				}
 			}

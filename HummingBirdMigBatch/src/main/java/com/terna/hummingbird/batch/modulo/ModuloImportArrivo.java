@@ -103,22 +103,24 @@ public class ModuloImportArrivo implements Modulo {
 				}
 
 				String[] line = record.split(",", -1);
+				String docNumber = "";
 				try {
-					String docNumber = line[5];
+					 docNumber = BatchUtil.checkLineValue(line[5], BatchUtil.REGEX_NUMERIC);
 					if (okMap.containsKey(docNumber)) {
 						continue;
 					}
+					String systemId = line[4];
 					log.info("Processing docNumber: " + docNumber);
 
 					DocumentArrivedPayload doc = new DocumentArrivedPayload();
 					doc.setIdLotto(nome_lotto);
 
 					String filePath = line[0] + line[1] + line[2];
-					doc.setFileToUpload(BatchUtil.toFileToUpload(filePath));
+					doc.setFileToUpload(BatchUtil.toFileToUpload(BatchUtil.checkLineValue(filePath, BatchUtil.REGEX_FILE_PATH)));
 					doc.setVersion(line[3]);
-					doc.setSystemId(line[4]);
-					doc.setDocNumber(line[5]);
-					doc.setDocNameObject(line[6]);
+					doc.setSystemId(systemId);
+					doc.setDocNumber(docNumber);
+					doc.setDocNameObject(BatchUtil.checkLineValue(line[6], BatchUtil.REGEX_NOT_EMPTY_STRING));
 					doc.setCreationDate(BatchUtil.convertDate(line[7]));
 					doc.setStatus(line[9]);
 					doc.setAbstractText(line[10]);
@@ -130,17 +132,17 @@ public class ModuloImportArrivo implements Modulo {
 					doc.setAuthor(line[16]);
 					doc.setAuthorId(BatchUtil.parseLong(line[17]));
 					doc.setNumeroAllegati(BatchUtil.parseInt(line[18]));
-					doc.setDataProtocollo(BatchUtil.convertDate(line[19]));
-					doc.setNumeroProtocollo(line[20]);
+					doc.setDataProtocollo(BatchUtil.convertDate(BatchUtil.checkLineValue(line[19], BatchUtil.REGEX_NOT_EMPTY_STRING)));
+					doc.setNumeroProtocollo(BatchUtil.checkLineValue(line[20], BatchUtil.REGEX_NOT_EMPTY_STRING));
 					doc.setTipoProtocollo(line[21]);
-					doc.setCodiceRegistro(line[22]);
+					doc.setCodiceRegistro(BatchUtil.checkLineValue(line[22], BatchUtil.REGEX_NOT_EMPTY_STRING));
 					doc.setDataProtocolloRicevuto(BatchUtil.convertDate(line[23]));
 					doc.setNumeroProtocolloRicevuto(line[24]);
 					doc.setAcl(aclMap.getOrDefault("593497", new ArrayList<>()));
 					doc.setMittenti(dmMap.getOrDefault("593497", new ArrayList<>()));
 					documentPayLoads.add(doc);
 				} catch (Exception e) {
-					log.error("Elaborazione lettura non avvenuta");
+					FileUtils.appendKo(path_file_ko, docNumber + ";" + record);
 					log.error(e.getMessage(), e);
 				}
 			}

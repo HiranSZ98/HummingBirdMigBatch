@@ -180,10 +180,10 @@ public class ModuloImportPartenza implements Modulo {
 
 			try {
 				log.info("Processing docNumber: " + doc.getDocNumber());
-				//log.info("json doc: " +  objectMapper.writeValueAsString(doc));
+				log.info("json doc: " +  objectMapper.writeValueAsString(doc));
 				String jsonDoc = objectMapper.writeValueAsString(doc);
-				//ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url_sent);
-				//log.info("DOC CREATED: " +  objectMapper.writeValueAsString(response));
+				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url_sent);
+				log.info("DOC CREATED: " +  objectMapper.writeValueAsString(response));
 				reporter.addSuccess();
 				FileUtils.appendOk(path_file_ok, doc.getDocNumber());
 			} catch (Exception e) {

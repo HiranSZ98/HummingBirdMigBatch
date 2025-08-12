@@ -87,8 +87,9 @@ public class ModuloImportAcl implements Modulo {
 				}
 
 				String[] line = record.split(",", -1);
+				String systemId = "";
 				try {
-					String systemId = String.valueOf(line[0]);
+					systemId = String.valueOf(line[0]);
 					log.info("Processing systemId: " + systemId);
 
 					if (okMap.containsKey(systemId)) {
@@ -101,6 +102,7 @@ public class ModuloImportAcl implements Modulo {
 					acl.setDescription(line[3]);
 					aclPayloads.add(acl);
 				} catch (Exception e) {
+					FileUtils.appendKo(path_file_ko, systemId + ";" + record);
 					log.error(e.getMessage(), e);
 				}
 			}
