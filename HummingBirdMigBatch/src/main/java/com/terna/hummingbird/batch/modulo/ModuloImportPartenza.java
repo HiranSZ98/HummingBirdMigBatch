@@ -28,8 +28,6 @@ public class ModuloImportPartenza implements Modulo {
 
 	private static Logger log = Logger.getLogger(ModuloImportPartenza.class);
 	public static final String module_name = "ModuloImportPartenza";
-	public String nome_lotto_prefix = "DOC_P_";
-	public String nome_lotto_postfix = "";
 	public String nome_lotto = "";
 	public String file_name = "";
 	public String dm_file_name = "";
@@ -58,8 +56,7 @@ public class ModuloImportPartenza implements Modulo {
 
 		url_sent = BatchConfig.getDocumentSentUrl();
 		reporter = ReporterFactory.getReporter("Modulo " + module_name);
-		nome_lotto_postfix = task.get(1);
-		nome_lotto = nome_lotto_prefix + nome_lotto_postfix;
+		nome_lotto = task.get(1);
 		file_name = csvRootPath + "\\" + nome_lotto + "\\" + nome_lotto + ".csv";
 		log.info(nome_lotto + " file name " + file_name);
 		path_file_ok = csvRootPath + "\\" + nome_lotto + "\\" + nome_lotto + ".ok";
@@ -97,6 +94,16 @@ public class ModuloImportPartenza implements Modulo {
 	@Override
 	public void execute() throws Exception {
 		log.info("Esecuzione Modulo " + module_name);
+		/*
+		\\GSWVADOC2\docs1\EPROCS26\A695540\20090303\05934471.pdf --> 0-1-2
+		DOCNUMBER --> 5
+		593497
+		DOCNAME (ghetto) not empty
+		DATA_PROTOCOLLO
+		3/4/2009
+		NUMERO_PROTOCOLLO not empty
+		CODICE_REGISTRO not empty
+		*/
 
 		try (BufferedReader br = new BufferedReader(new FileReader(file_name))) {
 			String record;
@@ -109,8 +116,9 @@ public class ModuloImportPartenza implements Modulo {
 				}
 				// Split line into fields
 				String[] line = record.split(",", -1); // -1 to keep empty strings
+				String docNumber = "";
 				try {
-					String docNumber = line[5];
+					docNumber = BatchUtil.checkLineValue(line[5], BatchUtil.REGEX_NUMERIC);
 					if (okMap.containsKey(docNumber)) {
 						continue; //skip already processed.
 					}
@@ -121,12 +129,12 @@ public class ModuloImportPartenza implements Modulo {
 					doc.setIdLotto(nome_lotto);
 
 					String filePath = line[0] + line[1] + line[2];
-					doc.setFileToUpload(BatchUtil.toFileToUpload(filePath));
+					doc.setFileToUpload(BatchUtil.toFileToUpload(BatchUtil.checkLineValue(filePath, BatchUtil.REGEX_FILE_PATH)));
 
 					doc.setVersion(line[3]);
 					doc.setSystemId(systemId);
 					doc.setDocNumber(docNumber);
-					doc.setDocNameObject(line[6]);
+					doc.setDocNameObject(BatchUtil.checkLineValue(line[6], BatchUtil.REGEX_NOT_EMPTY_STRING));
 					doc.setCreationDate(BatchUtil.convertDate(line[7]));
 					doc.setStatus(line[9]);
 
@@ -139,10 +147,10 @@ public class ModuloImportPartenza implements Modulo {
 					doc.setAuthor(line[16]);
 					doc.setAuthorId(BatchUtil.parseLong(line[17]));
 					doc.setNumeroAllegati(BatchUtil.parseInt(line[18]));
-					doc.setDataProtocollo(BatchUtil.convertDate(line[19]));
-					doc.setNumeroProtocollo(line[20]);
+					doc.setDataProtocollo(BatchUtil.convertDate(BatchUtil.checkLineValue(line[19], BatchUtil.REGEX_NOT_EMPTY_STRING)));
+					doc.setNumeroProtocollo(BatchUtil.checkLineValue(line[20], BatchUtil.REGEX_NOT_EMPTY_STRING));
 					doc.setTipoProtocollo(line[21]);
-					doc.setCodiceRegistro(line[22]);
+					doc.setCodiceRegistro(BatchUtil.checkLineValue(line[22], BatchUtil.REGEX_NOT_EMPTY_STRING));
 
 					Instant dataSpedizione = StringUtils.isEmpty(line[23])? null : BatchUtil.convertDate(line[23]);
 					doc.setDataSpedizione(dataSpedizione);
@@ -155,6 +163,7 @@ public class ModuloImportPartenza implements Modulo {
 					documents.add(doc);
 
 				} catch (Exception e) {
+					FileUtils.appendKo(path_file_ko, docNumber + ";" + record);
 					log.error(e.getMessage(), e);
 				}
 			}
@@ -171,10 +180,10 @@ public class ModuloImportPartenza implements Modulo {
 
 			try {
 				log.info("Processing docNumber: " + doc.getDocNumber());
-				log.info("json doc: " +  objectMapper.writeValueAsString(doc));
+				//log.info("json doc: " +  objectMapper.writeValueAsString(doc));
 				String jsonDoc = objectMapper.writeValueAsString(doc);
-				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url_sent);
-				log.info("DOC CREATED: " +  objectMapper.writeValueAsString(response));
+				//ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url_sent);
+				//log.info("DOC CREATED: " +  objectMapper.writeValueAsString(response));
 				reporter.addSuccess();
 				FileUtils.appendOk(path_file_ok, doc.getDocNumber());
 			} catch (Exception e) {
