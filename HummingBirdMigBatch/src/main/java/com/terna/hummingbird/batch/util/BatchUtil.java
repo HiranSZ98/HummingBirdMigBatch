@@ -23,7 +23,7 @@ public class BatchUtil {
 
 	public static final String REGEX_NUMERIC ="^[0-9]+$";
 	public static final String REGEX_FILE_PATH = "^(?:[a-zA-Z]:\\\\|\\\\\\\\[^\\\\]+\\\\[^\\\\]+)(?:[^\\\\/:*?\"<>|\\r\\n]+\\\\)*[^\\\\/:*?\"<>|\\r\\n]*$";
-	public static final String REGEX_NOT_EMPTY_STRING = "^.+$"
+	public static final String REGEX_NOT_EMPTY_STRING = "^.+$";
 
 	private static Logger log = Logger.getLogger(BatchUtil.class);
 	private static final Properties properties = new Properties();
