@@ -34,4 +34,20 @@ public class BatchConfig {
     public static String getDocumentSentUrl() {
         return properties.getProperty("document.sent.url");
     }
+
+    public static String getRegisterUrl() {
+        return properties.getProperty("register.url");
+    }
+
+    public static String getPersonUrl() {
+        return properties.getProperty("person.url");
+    }
+
+    public static String getAclUrl() {
+        return properties.getProperty("acl.url");
+    }
+
+    public static String getMittDesUrl() {
+        return properties.getProperty("mittdes.url");
+    }
 }
