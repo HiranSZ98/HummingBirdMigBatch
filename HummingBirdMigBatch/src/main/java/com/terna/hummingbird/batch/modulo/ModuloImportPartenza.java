@@ -40,9 +40,9 @@ public class ModuloImportPartenza implements Modulo {
 	private int num_rows = 0;
 	private String csvRootPath = BatchConfig.getCsvRootPath();
 
-	private Map<String, String> okMap = new HashMap<String, String>();
-	private Map<String, List<AclEntry>> aclMap = new HashMap<String, List<AclEntry>>();
-	private Map<String, List<DestMitt>> dmMap = new HashMap<String, List<DestMitt>>();
+	private Map<String, String> okMap = new HashMap<>();
+	private Map<String, List<AclEntry>> aclMap = new HashMap<>();
+	private Map<String, List<DestMitt>> dmMap = new HashMap<>();
 	private List<DocumentSentPayload> documents = new ArrayList<>();
 
 	// Initialize

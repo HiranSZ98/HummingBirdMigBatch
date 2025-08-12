@@ -32,7 +32,7 @@ public class ModuloImportAcl implements Modulo {
 	private ObjectMapper objectMapper;
 	private String csvRootPath = BatchConfig.getCsvRootPath();
 
-	private Map<String, String> okMap = new HashMap<String, String>();
+	private Map<String, String> okMap = new HashMap<>();
 	private List<AclEntry> aclPayloads = new ArrayList<>();
 
 	// Initialize

@@ -35,7 +35,7 @@ public class ModuloImportMittDest implements Modulo {
 	public String path_file_ok;
 	public String path_file_ko;
 
-	private Map<String, String> okMap = new HashMap<String, String>();
+	private Map<String, String> okMap = new HashMap<>();
 	private List<DestMitt> payloads = new ArrayList<>();
 
 	// Initialize
