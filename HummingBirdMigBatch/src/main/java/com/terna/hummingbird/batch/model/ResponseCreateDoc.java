@@ -1,8 +1,16 @@
 package com.terna.hummingbird.batch.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ResponseCreateDoc {
+
+    @JsonProperty("IdOperazione")
     private String idOperazione;
-    private String errore;
+
+    @JsonProperty("Errore")
+    private Errore errore;
+
+    @JsonProperty("Successo")
     private boolean successo;
 
     public String getIdOperazione() {
@@ -13,11 +21,11 @@ public class ResponseCreateDoc {
         this.idOperazione = idOperazione;
     }
 
-    public String getErrore() {
+    public Errore getErrore() {
         return errore;
     }
 
-    public void setErrore(String errore) {
+    public void setErrore(Errore errore) {
         this.errore = errore;
     }
 

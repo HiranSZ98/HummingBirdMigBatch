@@ -33,8 +33,6 @@ public class ModuloFactory {
 				return new ModuloImportPeople();
 			case Constants.BATCH_IMPORT_REGISTRI:
 				return new ModuloImportRegistri();
-			case Constants.BATCH_IMPORT_MITTENTI:
-				return new ModuloImportMittenti();
 			case Constants.BATCH_IMPORT_ARRIVO:
 				return new ModuloImportArrivo();
 			case Constants.BATCH_IMPORT_PARTENZA:

@@ -43,7 +43,7 @@ public class BatchUtil {
 			while ((line = reader.readNext()) != null) {
 				long systemId = Long.parseLong(line[0]);
 				long docNumber = Long.parseLong(line[1]);
-				long aclId = Long.parseLong(line[2]);
+				String aclId = line[2];  //todo:da sistemare long non String
 				String aclName = line[3];
 
 				AclEntry acl = new AclEntry();

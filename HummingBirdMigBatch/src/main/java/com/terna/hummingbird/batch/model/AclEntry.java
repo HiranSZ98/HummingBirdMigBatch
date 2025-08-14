@@ -2,7 +2,7 @@ package com.terna.hummingbird.batch.model;
 
 public class AclEntry {
     private long systemID;
-    private long groupID;
+    private String groupID;
     private String description;
 
 
@@ -14,11 +14,11 @@ public class AclEntry {
         this.systemID = systemID;
     }
 
-    public long getGroupID() {
+    public String getGroupID() {
         return groupID;
     }
 
-    public void setGroupID(long groupID) {
+    public void setGroupID(String groupID) {
         this.groupID = groupID;
     }
 
