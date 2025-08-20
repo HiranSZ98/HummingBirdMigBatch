@@ -1,5 +1,6 @@
 package com.terna.hummingbird.batch.modulo;
 
+import ch.qos.logback.core.util.StringUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -9,7 +10,6 @@ import com.terna.hummingbird.batch.conf.BatchConfig;
 import com.terna.hummingbird.batch.exception.BatchException;
 import com.terna.hummingbird.batch.model.*;
 import com.terna.hummingbird.batch.util.*;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 
@@ -152,9 +152,9 @@ public class ModuloImportPartenza implements Modulo {
 					doc.setTipoProtocollo(line[21]);
 					doc.setCodiceRegistro(BatchUtil.checkLineValue(line[22], BatchUtil.REGEX_NOT_EMPTY_STRING));
 
-					Instant dataSpedizione = StringUtils.isEmpty(line[23])? null : BatchUtil.convertDate(line[23]);
+					Instant dataSpedizione = StringUtil.isNullOrEmpty(line[23])? null : BatchUtil.convertDate(line[23]);
 					doc.setDataSpedizione(dataSpedizione);
-					String tipoSpedizione = StringUtils.isEmpty(line[24])? "N/D":line[24];
+					String tipoSpedizione = StringUtil.isNullOrEmpty(line[24])? "N/D":line[24];
 					doc.setTipoSpedizione(tipoSpedizione);
 
 					doc.setAcl(aclMap.getOrDefault(String.valueOf(docNumber), new ArrayList<>()));
