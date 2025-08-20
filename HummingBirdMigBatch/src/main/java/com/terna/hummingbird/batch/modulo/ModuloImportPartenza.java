@@ -38,7 +38,7 @@ public class ModuloImportPartenza implements Modulo {
 	private Reporter reporter;
 	private ObjectMapper objectMapper;
 	private int num_rows = 0;
-	private String csvRootPath = BatchConfig.getCsvRootPath();
+	private String csvRootPath = System.getenv("BATCH_ROOT");
 
 	private Map<String, String> okMap = new HashMap<>();
 	private Map<String, List<AclEntry>> aclMap = new HashMap<>();
@@ -54,7 +54,7 @@ public class ModuloImportPartenza implements Modulo {
 		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-		url_sent = BatchConfig.getDocumentSentUrl();
+		url_sent = System.getenv("-------");
 		reporter = ReporterFactory.getReporter("Modulo " + module_name);
 		nome_lotto = task.get(1);
 		file_name = csvRootPath + "\\" + nome_lotto + "\\" + nome_lotto + ".csv";

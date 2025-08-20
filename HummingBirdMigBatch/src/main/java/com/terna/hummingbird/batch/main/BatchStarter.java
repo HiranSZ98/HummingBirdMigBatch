@@ -20,6 +20,9 @@ public class BatchStarter {
 	private static Logger log = Logger.getLogger(BatchStarter.class);
 
 	public static void main(String[] args) throws Exception{
+		args = new String[2]; // empty array with 2 slots
+		args[0]=System.getenv("BATCH_TYPE");
+		args[1]=System.getenv("ID_BATCH");
 		int numArgs = args.length;
 		if (numArgs > 0) {
 			// -->> Version

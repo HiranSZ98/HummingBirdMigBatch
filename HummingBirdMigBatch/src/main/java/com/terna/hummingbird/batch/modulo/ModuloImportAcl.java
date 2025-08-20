@@ -98,7 +98,7 @@ public class ModuloImportAcl implements Modulo {
 
 					AclEntry acl = new AclEntry();
 					acl.setSystemID(BatchUtil.parseLong(line[0]));
-					acl.setGroupID(BatchUtil.parseLong(line[2]));
+					acl.setGroupID(line[2]);
 					acl.setDescription(line[3]);
 					aclPayloads.add(acl);
 				} catch (Exception e) {
