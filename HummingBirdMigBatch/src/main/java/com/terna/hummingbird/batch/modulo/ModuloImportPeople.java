@@ -29,7 +29,7 @@ public class ModuloImportPeople implements Modulo {
 	public String path_file_ko;
 	private Reporter reporter;
 	private ObjectMapper objectMapper;
-	private String csvRootPath = BatchConfig.getCsvRootPath();
+	private String csvRootPath = System.getenv("BATCH_ROOT");
 
 	private Map<String, String> okMap = new HashMap<>();
 	private List<PersonPayload> personPayloads = new ArrayList<>();
@@ -43,7 +43,7 @@ public class ModuloImportPeople implements Modulo {
 		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-		url_sent = BatchConfig.getPersonUrl();
+		url_sent = System.getenv("PERSON_URL");
 		reporter = ReporterFactory.getReporter("Modulo " + module_name);
 		file_name = csvRootPath + "\\" + nome_lotto + "\\" + nome_lotto + ".csv";
 		log.info(nome_lotto + " file name " + file_name);

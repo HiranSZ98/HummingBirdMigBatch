@@ -30,7 +30,7 @@ public class ModuloImportRegistri implements Modulo {
 	public String path_file_ko;
 	private Reporter reporter;
 	private ObjectMapper objectMapper;
-	private String csvRootPath = BatchConfig.getCsvRootPath();
+	private String csvRootPath = System.getenv("BATCH_ROOT");
 
 	private Map<String, String> okMap = new HashMap<>();
 	private List<RegisterPayload> registerPayloads = new ArrayList<>();
@@ -43,7 +43,7 @@ public class ModuloImportRegistri implements Modulo {
 		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-		url_sent = BatchConfig.getRegisterUrl();
+		url_sent = System.getenv("REGISTER_URL");
 		reporter = ReporterFactory.getReporter("Modulo " + module_name);
 		file_name = csvRootPath + "\\" + nome_lotto + "\\" + nome_lotto + ".csv";
 		log.info(nome_lotto + " file name " + file_name);

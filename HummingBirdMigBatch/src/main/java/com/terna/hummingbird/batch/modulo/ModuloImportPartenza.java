@@ -54,7 +54,7 @@ public class ModuloImportPartenza implements Modulo {
 		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-		url_sent = System.getenv("-------");
+		url_sent = System.getenv("DOCUMENT_SENT_URL");
 		reporter = ReporterFactory.getReporter("Modulo " + module_name);
 		nome_lotto = task.get(1);
 		file_name = csvRootPath + "\\" + nome_lotto + "\\" + nome_lotto + ".csv";
