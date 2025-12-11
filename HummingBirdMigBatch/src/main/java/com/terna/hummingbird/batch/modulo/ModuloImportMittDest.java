@@ -30,7 +30,7 @@ public class ModuloImportMittDest implements Modulo {
 
 	private Reporter reporter;
 	private ObjectMapper objectMapper = new ObjectMapper();
-	private String csvRootPath = BatchConfig.getCsvRootPath();
+	private String csvRootPath = System.getenv("BATCH_ROOT");
 	public String url_sent = "";
 	public String path_file_ok;
 	public String path_file_ko;
@@ -47,7 +47,7 @@ public class ModuloImportMittDest implements Modulo {
 		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-		url_sent = BatchConfig.getDocumentSentUrl();
+		url_sent = System.getenv("MITTDES_URL");
 		reporter = ReporterFactory.getReporter("Modulo " + module_name);
 		file_name = csvRootPath + "\\" + nome_lotto + "\\" + nome_lotto + ".csv";
 		log.info(nome_lotto + " file name " + file_name);

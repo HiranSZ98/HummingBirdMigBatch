@@ -21,7 +21,7 @@ public class ModuloImportGroup implements Modulo {
 	public String file_name = "";
 	private Reporter reporter;
 	private int num_rows = 0;
-	private String csvPath = "C:\\RjcSoft\\NTTData\\Terna\\Estrazioni\\Lotti";
+	private String csvPath = System.getenv("BATCH_ROOT");
 
 	private List<String> payloads = new ArrayList<>();
 
