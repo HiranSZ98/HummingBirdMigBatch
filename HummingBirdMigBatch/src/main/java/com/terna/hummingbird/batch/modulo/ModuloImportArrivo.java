@@ -162,9 +162,16 @@ public class ModuloImportArrivo implements Modulo {
 				log.info("json doc: " + objectMapper.writeValueAsString(doc));
 				String jsonDoc = objectMapper.writeValueAsString(doc);
 				ResponseCreateDoc response = RestClient.callCreateDocument(jsonDoc, url_sent);
-				log.info("DOC CREATED: " +  objectMapper.writeValueAsString(response));
-				reporter.addSuccess();
-				FileUtils.appendOk(path_file_ok, doc.getDocNumber());
+				log.info("Response: " +  objectMapper.writeValueAsString(response));
+				if (!response.isSuccesso() && !response.getErrore().getCodice().equalsIgnoreCase("003")) {
+					log.info("DOC ERROR: docNumber: " + doc.getDocNumber());
+					throw new Exception(response.getErrore().getDescrizione());
+				} else {
+					//OK
+					log.info("DOC CREATED: docNumber: " + doc.getDocNumber());
+					reporter.addSuccess();
+					FileUtils.appendOk(path_file_ok, doc.getDocNumber());
+				}
 			} catch (Exception e) {
 				FileUtils.appendKo(path_file_ko, doc.getDocNumber());
 				log.error(e.getMessage(), e);
